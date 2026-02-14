@@ -275,7 +275,7 @@ footer {
 .marquee-content {
     display: flex;
     gap: 60px; /* Espaço entre as cidades */
-    animation: scroll-left 40s linear infinite; /* 40 segundos para dar a volta */
+    animation: scroll-left 50s linear infinite; /* 50 segundos para dar a volta */
 }
 
 .marquee-content span {
@@ -305,3 +305,4 @@ footer {
 .marquee:hover .marquee-content {
     animation-play-state: paused;
 }
+
