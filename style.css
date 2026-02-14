@@ -158,3 +158,86 @@ footer { padding: 80px 5% 40px; background: #000; color: #fff; font-size: 0.85re
     .main-logo { height: 50px; }
     nav ul { display: none; } 
 }
+
+/* --- FOOTER PREMIUM --- */
+footer {
+    padding: 80px 5% 40px;
+    background: #0a0a0a; /* Preto mais profundo */
+    color: #fff;
+    border-top: 1px solid #222;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 60px;
+    margin-bottom: 60px;
+    text-align: left;
+}
+
+.footer-logo {
+    width: 180px;
+    margin-bottom: 25px;
+    filter: brightness(0) invert(1); /* Deixa a logo toda branca para o fundo preto */
+}
+
+.footer-column h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    color: var(--accent);
+    font-weight: 400;
+}
+
+.footer-column p {
+    color: #888;
+    font-size: 0.85rem;
+    line-height: 1.8;
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #888;
+    text-decoration: none;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
+
+.footer-link:hover { color: #fff; }
+
+.inpi-badge {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 5px 12px;
+    border: 1px solid #444;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #aaa;
+}
+
+.mt-20 { margin-top: 20px; }
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #222;
+    padding-top: 40px;
+}
+
+.tech-badges {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.footer-bottom p {
+    font-size: 0.7rem;
+    color: #444;
+    letter-spacing: 1px;
+}
