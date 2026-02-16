@@ -306,60 +306,63 @@ footer {
     animation-play-state: paused;
 }
 
-/* Container que força o empilhamento vertical */
+/* Container que mantém tudo unido no canto */
 .whatsapp-container {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    display: flex !important;
-    flex-direction: column !important; /* Força um em cima do outro */
-    align-items: flex-end !important;   /* Alinha o balão e o botão à direita */
+    width: 60px; /* Largura do botão para referência */
+    height: 60px;
     z-index: 99999;
 }
 
-/* Balão de Mensagem */
-.whatsapp-message {
-    background-color: #ffffff;
-    color: #333;
-    padding: 10px 15px;
-    border-radius: 12px;
-    margin-bottom: 15px !important; /* Espaço real para o ícone não subir nele */
-    font-size: 14px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    position: relative;
-    border: 1px solid #e0e0e0;
-    font-family: sans-serif;
-    white-space: nowrap;
-    display: block; /* Garante que ele ocupe o espaço dele */
-}
-
-/* Setinha do balão */
-.whatsapp-message::after {
-    content: "";
-    position: absolute;
-    bottom: -10px; /* Ajustado para a nova margem */
-    right: 20px;
-    border-width: 10px 10px 0;
-    border-style: solid;
-    border-color: #ffffff transparent;
-}
-
-/* O Botão Verde */
+/* O Botão Verde (Base) */
 .whatsapp-float {
     width: 60px;
     height: 60px;
     background-color: #25d366;
     color: #FFF !important;
     border-radius: 50%;
-    display: flex !important;
+    display: flex;
     align-items: center;
     justify-content: center;
     font-size: 35px;
     text-decoration: none;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 2;
 }
 
+/* Balão de Mensagem (Flutuando acima) */
+.whatsapp-message {
+    position: absolute;
+    bottom: 75px; /* Sobe 75px para ficar acima do botão de 60px */
+    right: 0;
+    background-color: #ffffff;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border: 1px solid #e0e0e0;
+    font-family: sans-serif;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+/* Setinha do balão */
+.whatsapp-message::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    right: 15px;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: #ffffff transparent;
+}
+
+/* Efeito de zoom apenas no botão */
 .whatsapp-float:hover {
     transform: scale(1.1);
+    transition: 0.3s;
 }
