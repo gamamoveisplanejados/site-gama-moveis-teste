@@ -306,14 +306,14 @@ footer {
     animation-play-state: paused;
 }
 
-/* Container principal */
+/* Container principal - Força o empilhamento vertical */
 .whatsapp-container {
     position: fixed;
-    bottom: 20px; /* Distância do fundo */
-    right: 20px;  /* Distância da direita */
+    bottom: 20px;
+    right: 20px;
     display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza o balão em relação ao ícone */
+    flex-direction: column; /* Alinha os itens um abaixo do outro */
+    align-items: flex-end;  /* Alinha tudo pela direita */
     z-index: 9999;
 }
 
@@ -323,28 +323,29 @@ footer {
     color: #333;
     padding: 10px 15px;
     border-radius: 12px;
-    margin-bottom: 12px; /* Cria o espaço para não bater no ícone */
+    margin-bottom: 10px; /* Cria o espaço real entre o texto e o ícone */
     font-size: 14px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     position: relative;
     border: 1px solid #e0e0e0;
     font-family: sans-serif;
-    white-space: nowrap; /* Impede que o texto quebre linha */
+    white-space: nowrap; 
+    /* Remove qualquer flutuação que possa estar herdada */
+    float: none; 
 }
 
-/* Setinha do balão apontando para baixo */
+/* Ajuste da setinha para ficar no lugar certo */
 .whatsapp-message::after {
     content: "";
     position: absolute;
     bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 20px; /* Alinhada com o ícone na direita */
     border-width: 8px 8px 0;
     border-style: solid;
     border-color: #ffffff transparent;
 }
 
-/* O Botão Redondo */
+/* O Botão Verde */
 .whatsapp-float {
     width: 60px;
     height: 60px;
@@ -358,6 +359,8 @@ footer {
     text-decoration: none;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     transition: all 0.3s ease;
+    /* Garante que ele não tente subir para a linha do texto */
+    clear: both; 
 }
 
 .whatsapp-float:hover {
