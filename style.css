@@ -306,3 +306,59 @@ footer {
     animation-play-state: paused;
 }
 
+/* Container que agrupa o botão e a mensagem */
+.whatsapp-container {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 9999;
+}
+
+/* Balão de Mensagem */
+.whatsapp-message {
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    position: relative;
+    border: 1px solid #ddd;
+    font-family: sans-serif;
+}
+
+/* Setinha do balão */
+.whatsapp-message::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    right: 20px;
+    border-width: 8px 8px 0;
+    border-style: solid;
+    border-color: #f1f1f1 transparent;
+}
+
+/* O Botão Verde Redondo */
+.whatsapp-float {
+    width: 60px;
+    height: 60px;
+    background-color: #25d366;
+    color: #FFF !important;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    text-decoration: none;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    background-color: #128c7e;
+}
