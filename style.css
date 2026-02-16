@@ -337,7 +337,7 @@ footer {
 .whatsapp-message {
     position: absolute;
     bottom: 90px; /* Sobe 75px para ficar acima do botão de 60px */
-    right: 10;
+    right: -10;
     background-color: #ffffff;
     color: #333;
     padding: 10px 15px;
@@ -366,6 +366,7 @@ footer {
     transform: scale(1.1);
     transition: 0.3s;
 }
+
 
 
 
