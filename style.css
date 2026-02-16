@@ -336,7 +336,7 @@ footer {
 /* Balão de Mensagem (Flutuando acima) */
 .whatsapp-message {
     position: absolute;
-    bottom: 75px; /* Sobe 75px para ficar acima do botão de 60px */
+    bottom: 90px; /* Sobe 75px para ficar acima do botão de 60px */
     right: 0;
     background-color: #ffffff;
     color: #333;
@@ -366,3 +366,4 @@ footer {
     transform: scale(1.1);
     transition: 0.3s;
 }
+
