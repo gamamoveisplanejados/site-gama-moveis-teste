@@ -60,21 +60,36 @@ body {
 
 /* --- FIX DO BANNER (HERO) --- */
 .hero {
-    margin-top: 70px !important; /* EMPURRA O BANNER PARA BAIXO DA NAVBAR */
+    /* --- FIX DO BANNER (HERO) COM IMAGEM DO UNSPLASH --- */
+.hero {
+    margin-top: 70px !important; /* Espaço para a navbar preta */
     height: calc(100vh - 70px) !important;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
+    
+    /* Imagem industrial de marcenaria de luxo */
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=2070') no-repeat center center/cover !important;
 }
 
-/* Garante que o texto do banner fique centralizado */
 .hero-content {
     position: relative;
     z-index: 2;
     text-align: center;
     width: 100%;
+}
+
+.hero-content h1 {
+    font-family: 'Montserrat', sans-serif !important;
+    color: #ffffff !important;
+    font-size: 3.5rem;
+    font-weight: 200;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
 }
 
 /* --- GLOBAL SECTIONS --- */
@@ -369,6 +384,7 @@ footer {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     border-color: var(--accent);
 }
+
 
 
 
