@@ -367,6 +367,17 @@ footer {
     transition: 0.3s;
 }
 
+.post-card {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #eee;
+    transition: 0.3s;
+}
+
+.post-card:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-color: var(--accent);
+}
 
 
 
