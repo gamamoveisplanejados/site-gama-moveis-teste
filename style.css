@@ -15,46 +15,41 @@ body {
 }
 
 /* --- NAVBAR & LOGO --- */
-/* NAVBAR COM FUNDO PRETO E MENU HORIZONTAL */
+/* NAVBAR ESTREITA E LUXUOSA */
 .navbar { 
     position: fixed; 
     width: 100%; 
-    padding: 15px 5%; 
+    padding: 5px 5%; /* Diminuído para reduzir a altura total */
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    background: #000000; /* Fundo totalmente preto */
+    background: #000000; 
     z-index: 1000; 
     border-bottom: 1px solid #222; 
+    height: 70px; /* Definimos uma altura fixa para garantir que fique estreito */
 }
 
-/* FORÇA O MENU A FICAR NA HORIZONTAL */
+/* AJUSTE DA LOGO PARA NÃO ESTICAR O MENU */
+.main-logo { 
+    height: 50px; /* Reduzimos de 70px para 50px */
+    width: auto; 
+    display: block;
+    object-fit: contain; /* Garante que a logo não distorça */
+}
+
+/* ALINHAMENTO DO MENU */
 .navbar nav ul { 
-    display: flex !important; /* Alinha os itens lado a lado */
+    display: flex !important; 
     list-style: none; 
     margin: 0; 
     padding: 0; 
-    flex-direction: row; /* Garante a direção horizontal */
+    flex-direction: row; 
+    align-items: center;
 }
 
 .navbar nav ul li { 
-    margin-left: 25px; /* Espaçamento entre os botões */
+    margin-left: 20px; 
 }
-
-.navbar nav ul li a { 
-    text-decoration: none; 
-    color: #ffffff; 
-    font-size: 0.75rem; 
-    text-transform: uppercase; 
-    letter-spacing: 1.5px; 
-    transition: 0.3s; 
-    white-space: nowrap; /* Impede que o texto quebre linha */
-}
-
-.navbar nav ul li a:hover { 
-    color: #a68a64; /* Destaque em bronze ao passar o mouse */
-}
-
 /* --- HERO SECTION --- */
 .hero {
     height: 100vh;
@@ -376,6 +371,7 @@ footer {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     border-color: var(--accent);
 }
+
 
 
 
