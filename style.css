@@ -15,89 +15,67 @@ body {
 }
 
 /* --- NAVBAR & LOGO --- */
-/* --- CABEÇALHO PROFISSIONAL GAMA --- */
+/* --- FIX NAVBAR PRETA E ESTREITA --- */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 70px; /* Define altura fixa para ficar estreito */
+    height: 70px !important; /* Altura fixa para não bugar o banner */
     background-color: #000000 !important;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 5%;
-    z-index: 9999;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0 5% !important;
+    z-index: 9999 !important;
     border-bottom: 1px solid #222;
 }
 
-/* Ajuste da Logo para não esticar a barra */
+/* Ajuste da Logo */
 .main-logo {
-    height: 45px !important; /* Logo menor para a barra ficar estreita */
-    width: auto;
-    display: block;
+    height: 45px !important;
+    width: auto !important;
+    display: block !important;
 }
 
-/* Força o Menu a ser Horizontal */
+/* Menu Horizontal Branco */
 .navbar nav ul {
     display: flex !important;
     flex-direction: row !important;
     list-style: none !important;
     margin: 0 !important;
     padding: 0 !important;
-    gap: 20px; /* Espaço entre os links */
+    gap: 20px !important;
 }
 
-/* Estilo dos Links: Branco e sem Roxo/Azul */
 .navbar nav ul li a {
     text-decoration: none !important;
-    color: #ffffff !important; /* Força o branco sempre */
+    color: #ffffff !important;
     font-family: 'Montserrat', sans-serif !important;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    transition: 0.3s;
     white-space: nowrap;
 }
 
-/* Cor Bronze ao passar o mouse */
-.navbar nav ul li a:hover {
-    color: #a68a64 !important;
-}
-
-/* Ajuste para o conteúdo do site não ficar escondido atrás do topo */
-body {
-    padding-top: 70px;
-}
-}
-/* --- HERO SECTION --- */
+/* --- FIX DO BANNER (HERO) --- */
 .hero {
-    height: 100vh;
-    background: url('https://images.unsplash.com/photo-1600585152220-90363fe7e115?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    text-align: center; 
-    color: #fff;
+    margin-top: 70px !important; /* EMPURRA O BANNER PARA BAIXO DA NAVBAR */
+    height: calc(100vh - 70px) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
+    overflow: hidden;
 }
-.hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
-.hero-content { position: relative; z-index: 1; padding: 0 20px; }
-.hero h1 { font-size: 3.5rem; font-weight: 200; letter-spacing: 10px; margin-bottom: 20px; }
-.hero p { font-size: 1rem; font-weight: 200; letter-spacing: 2px; margin-bottom: 30px; }
 
-.btn-primary { 
-    display: inline-block; 
-    padding: 15px 40px; 
-    border: 1px solid #fff; 
-    color: #fff; 
-    text-decoration: none; 
-    text-transform: uppercase; 
-    font-size: 0.75rem; 
-    letter-spacing: 2px; 
-    transition: 0.4s; 
+/* Garante que o texto do banner fique centralizado */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
 }
-.btn-primary:hover { background: #fff; color: #000; }
 
 /* --- GLOBAL SECTIONS --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -391,6 +369,7 @@ footer {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     border-color: var(--accent);
 }
+
 
 
 
