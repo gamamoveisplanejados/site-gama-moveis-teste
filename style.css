@@ -15,47 +15,42 @@ body {
 }
 
 /* --- NAVBAR & LOGO --- */
-.navbar {
+/* NAVBAR COM FUNDO PRETO */
+.navbar { 
     position: fixed; 
     width: 100%; 
     padding: 10px 5%; 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    background: rgba(255, 255, 255, 0.98); 
+    background: #000000; /* Fundo totalmente preto */
     z-index: 1000; 
-    border-bottom: 1px solid #eee;
-    transition: 0.3s;
+    border-bottom: 1px solid #222; /* Linha sutil para separação */
 }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-}
-
-.main-logo {
-    height: 70px; /* Altura ideal para a logo da Gama */
-    width: auto;
-    display: block;
-    transition: transform 0.3s ease;
-}
-
-.main-logo:hover {
-    transform: scale(1.03);
-}
-
-nav ul { display: flex; list-style: none; align-items: center; }
-nav ul li { margin-left: 25px; }
+/* AJUSTE DOS LINKS DO MENU PARA BRANCO */
 nav ul li a { 
     text-decoration: none; 
-    color: var(--primary); 
+    color: #ffffff; /* Texto branco */
     font-size: 0.75rem; 
     text-transform: uppercase; 
     letter-spacing: 1.5px; 
-    font-weight: 400;
-    transition: 0.3s;
+    transition: 0.3s; 
 }
-nav ul li a:hover { color: var(--accent); }
+
+/* COR AO PASSAR O MOUSE (Destaque em Bronze) */
+nav ul li a:hover { 
+    color: #a68a64; 
+}
+
+/* GARANTIR QUE A LOGO FIQUE BRANCA SE FOR PNG TRANSPARENTE */
+.main-logo { 
+    height: 70px; 
+    width: auto; 
+    display: block;
+    /* Se a sua logo ainda tiver partes pretas, remova o comentário da linha abaixo: */
+    /* filter: brightness(0) invert(1); */
+}
 
 /* --- HERO SECTION --- */
 .hero {
@@ -378,6 +373,7 @@ footer {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     border-color: var(--accent);
 }
+
 
 
 
