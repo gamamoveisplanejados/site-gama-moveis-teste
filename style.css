@@ -117,10 +117,52 @@ h2 { font-weight: 200; letter-spacing: 5px; text-transform: uppercase; margin-bo
 .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
 .tech-item i { color: var(--accent); font-size: 2rem; margin-bottom: 20px; display: block; }
 
-/* --- MARQUEE --- */
-.atendimento-cidades { padding: 40px 0; background: #f8f8f8; overflow: hidden; width: 100%; }
-.marquee-content { display: flex; gap: 60px; animation: scroll-left 50s linear infinite; }
-@keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+/* --- ANIMAÇÃO DE CIDADES (MARQUEE INFINITO CORRIGIDO) --- */
+.atendimento-cidades {
+    padding: 60px 0;
+    background: #f8f8f8;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    overflow: hidden; /* Esconde o que sai da tela lateralmente */
+    width: 100%;
+}
+
+.marquee {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap; /* IMPEDE QUE AS CIDADES QUEBREM LINHA */
+    width: 100%;
+}
+
+.marquee-content {
+    display: flex;
+    flex-direction: row; /* FORÇA A LINHA HORIZONTAL */
+    gap: 60px; 
+    animation: scroll-left 80s linear infinite; /* Velocidade elegante para a Gama */
+}
+
+.marquee-content span {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: inline-block;
+    white-space: nowrap; /* REFORÇA A LINHA ÚNICA */
+}
+
+/* O ponto dourado sofisticado entre as cidades */
+.marquee-content span::after {
+    content: '•';
+    margin-left: 60px;
+    color: #a68a64; 
+    font-weight: bold;
+}
+
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
 
 /* --- FOOTER --- */
 footer { padding: 60px 5% 30px; background: #0a0a0a; color: #fff; border-top: 1px solid #222; }
@@ -138,3 +180,4 @@ footer { padding: 60px 5% 30px; background: #0a0a0a; color: #fff; border-top: 1p
     .grid-3d { grid-template-columns: 1fr; }
     .hero h1 { font-size: 2rem; }
 }
+
