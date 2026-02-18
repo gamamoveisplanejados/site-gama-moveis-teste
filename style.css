@@ -15,61 +15,59 @@ body {
 }
 
 /* --- NAVBAR & LOGO --- */
-/* NAVBAR ESTREITA E LUXUOSA */
-.navbar { 
-    /* NAVBAR ESTREITA E LUXUOSA */
-.navbar { 
-    position: fixed; 
-    width: 100%; 
-    padding: 0 5%; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    background: #000000 !important; /* Força o fundo preto */
-    z-index: 1000; 
-    border-bottom: 1px solid #222; 
-    height: 70px; 
-}
-
-/* AJUSTE DA LOGO */
-.main-logo { 
-    height: 50px; 
-    width: auto; 
-    display: block;
-    object-fit: contain;
-}
-
-/* ALINHAMENTO DO MENU HORIZONTAL */
-.navbar nav ul { 
-    display: flex !important; 
-    list-style: none !important; 
-    margin: 0; 
-    padding: 0; 
-    flex-direction: row !important; 
+/* --- CABEÇALHO PROFISSIONAL GAMA --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px; /* Define altura fixa para ficar estreito */
+    background-color: #000000 !important;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    padding: 0 5%;
+    z-index: 9999;
+    border-bottom: 1px solid #222;
 }
 
-.navbar nav ul li { 
-    margin-left: 20px; 
+/* Ajuste da Logo para não esticar a barra */
+.main-logo {
+    height: 45px !important; /* Logo menor para a barra ficar estreita */
+    width: auto;
+    display: block;
 }
 
-/* CORREÇÃO DOS LINKS: FORÇA O BRANCO E A FONTE MONTSERRAT */
-.navbar nav ul li a, 
-.navbar nav ul li a:visited, 
-.navbar nav ul li a:active { 
-    text-decoration: none !important; 
-    color: #ffffff !important; /* Força o branco mesmo após clicado */
-    font-family: 'Montserrat', sans-serif !important; 
-    font-size: 0.75rem; 
-    text-transform: uppercase; 
-    letter-spacing: 1.5px; 
-    transition: 0.3s; 
+/* Força o Menu a ser Horizontal */
+.navbar nav ul {
+    display: flex !important;
+    flex-direction: row !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 20px; /* Espaço entre os links */
+}
+
+/* Estilo dos Links: Branco e sem Roxo/Azul */
+.navbar nav ul li a {
+    text-decoration: none !important;
+    color: #ffffff !important; /* Força o branco sempre */
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: 0.3s;
     white-space: nowrap;
 }
 
-/* COR AO PASSAR O MOUSE (BRONZE) */
-.navbar nav ul li a:hover { 
-    color: #a68a64 !important; 
+/* Cor Bronze ao passar o mouse */
+.navbar nav ul li a:hover {
+    color: #a68a64 !important;
+}
+
+/* Ajuste para o conteúdo do site não ficar escondido atrás do topo */
+body {
+    padding-top: 70px;
 }
 }
 /* --- HERO SECTION --- */
@@ -393,6 +391,7 @@ footer {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     border-color: var(--accent);
 }
+
 
 
 
