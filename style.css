@@ -17,38 +17,60 @@ body {
 /* --- NAVBAR & LOGO --- */
 /* NAVBAR ESTREITA E LUXUOSA */
 .navbar { 
+    /* NAVBAR ESTREITA E LUXUOSA */
+.navbar { 
     position: fixed; 
     width: 100%; 
-    padding: 5px 5%; /* Diminuído para reduzir a altura total */
+    padding: 0 5%; 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    background: #000000; 
+    background: #000000 !important; /* Força o fundo preto */
     z-index: 1000; 
     border-bottom: 1px solid #222; 
-    height: 70px; /* Definimos uma altura fixa para garantir que fique estreito */
+    height: 70px; 
 }
 
-/* AJUSTE DA LOGO PARA NÃO ESTICAR O MENU */
+/* AJUSTE DA LOGO */
 .main-logo { 
-    height: 50px; /* Reduzimos de 70px para 50px */
+    height: 50px; 
     width: auto; 
     display: block;
-    object-fit: contain; /* Garante que a logo não distorça */
+    object-fit: contain;
 }
 
-/* ALINHAMENTO DO MENU */
+/* ALINHAMENTO DO MENU HORIZONTAL */
 .navbar nav ul { 
     display: flex !important; 
-    list-style: none; 
+    list-style: none !important; 
     margin: 0; 
     padding: 0; 
-    flex-direction: row; 
+    flex-direction: row !important; 
     align-items: center;
 }
 
 .navbar nav ul li { 
     margin-left: 20px; 
+}
+
+/* CORREÇÃO DOS LINKS: FORÇA O BRANCO E A FONTE MONTSERRAT */
+.navbar nav ul li a, 
+.navbar nav ul li a:visited, 
+.navbar nav ul li a:active { 
+    text-decoration: none !important; 
+    color: #ffffff !important; /* Força o branco mesmo após clicado */
+    font-family: 'Montserrat', sans-serif !important; 
+    font-size: 0.75rem; 
+    text-transform: uppercase; 
+    letter-spacing: 1.5px; 
+    transition: 0.3s; 
+    white-space: nowrap;
+}
+
+/* COR AO PASSAR O MOUSE (BRONZE) */
+.navbar nav ul li a:hover { 
+    color: #a68a64 !important; 
+}
 }
 /* --- HERO SECTION --- */
 .hero {
@@ -371,6 +393,7 @@ footer {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     border-color: var(--accent);
 }
+
 
 
 
