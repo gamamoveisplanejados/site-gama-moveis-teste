@@ -15,41 +15,44 @@ body {
 }
 
 /* --- NAVBAR & LOGO --- */
-/* NAVBAR COM FUNDO PRETO */
+/* NAVBAR COM FUNDO PRETO E MENU HORIZONTAL */
 .navbar { 
     position: fixed; 
     width: 100%; 
-    padding: 10px 5%; 
+    padding: 15px 5%; 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
     background: #000000; /* Fundo totalmente preto */
     z-index: 1000; 
-    border-bottom: 1px solid #222; /* Linha sutil para separação */
+    border-bottom: 1px solid #222; 
 }
 
-/* AJUSTE DOS LINKS DO MENU PARA BRANCO */
-nav ul li a { 
+/* FORÇA O MENU A FICAR NA HORIZONTAL */
+.navbar nav ul { 
+    display: flex !important; /* Alinha os itens lado a lado */
+    list-style: none; 
+    margin: 0; 
+    padding: 0; 
+    flex-direction: row; /* Garante a direção horizontal */
+}
+
+.navbar nav ul li { 
+    margin-left: 25px; /* Espaçamento entre os botões */
+}
+
+.navbar nav ul li a { 
     text-decoration: none; 
-    color: #ffffff; /* Texto branco */
+    color: #ffffff; 
     font-size: 0.75rem; 
     text-transform: uppercase; 
     letter-spacing: 1.5px; 
     transition: 0.3s; 
+    white-space: nowrap; /* Impede que o texto quebre linha */
 }
 
-/* COR AO PASSAR O MOUSE (Destaque em Bronze) */
-nav ul li a:hover { 
-    color: #a68a64; 
-}
-
-/* GARANTIR QUE A LOGO FIQUE BRANCA SE FOR PNG TRANSPARENTE */
-.main-logo { 
-    height: 70px; 
-    width: auto; 
-    display: block;
-    /* Se a sua logo ainda tiver partes pretas, remova o comentário da linha abaixo: */
-    /* filter: brightness(0) invert(1); */
+.navbar nav ul li a:hover { 
+    color: #a68a64; /* Destaque em bronze ao passar o mouse */
 }
 
 /* --- HERO SECTION --- */
@@ -373,6 +376,7 @@ footer {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     border-color: var(--accent);
 }
+
 
 
 
