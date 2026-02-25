@@ -197,53 +197,56 @@ footer { padding: 60px 5% 30px; background: #0a0a0a; color: #fff; border-top: 1p
 }
 
 
-/* --- ESTILO DAS MARCAS PARCEIRAS --- */
-.marcas-parceiras {
-  text-align: center;
-  padding: 60px 20px;
-  background-color: #fcfcfc; /* Fundo levemente cinza/gelo */
+/* --- ESTILO DAS MARCAS PARCEIRAS (ROLAGEM INFINITA) --- */
+.marcas-parceiras-scroll {
+  width: 100%;
+  padding: 40px 0;
+  background-color: #fcfcfc;
   border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
+  overflow: hidden; /* Esconde o que sai da tela e tira a barra de rolagem */
+  position: relative;
 }
 
-.marcas-parceiras h2 {
-  font-size: 1.5rem;
-  color: #555;
-  margin-bottom: 40px;
-  font-weight: 500;
-}
-
-.marcas-grid {
+.marcas-track {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 40px; 
-  flex-wrap: wrap; 
-  max-width: 1100px;
-  margin: 0 auto;
+  width: max-content; /* Permite que a esteira seja maior que a tela */
+  animation: rolarMarcas 35s linear infinite; /* Tempo da animação */
 }
 
-.marca-logo {
-  max-height: 45px; 
-  max-width: 140px;
+/* Opcional: Pausa a rolagem quando o cliente coloca o mouse em cima */
+.marcas-track:hover {
+  animation-play-state: paused;
+}
+
+.marca-slide {
+  height: 40px !important; /* Trava a altura para não explodir */
+  width: auto !important;
+  max-width: 180px; 
   object-fit: contain;
-  /* O mix-blend-mode remove o fundo branco dos arquivos JPG */
-  mix-blend-mode: multiply;
-  filter: grayscale(100%) opacity(70%); 
-  transition: all 0.3s ease; 
+  margin: 0 40px; /* Espaço entre uma logo e outra */
+  mix-blend-mode: multiply; /* Tira o fundo branco das fotos JPG */
+  filter: grayscale(100%) opacity(60%);
+  transition: all 0.3s ease;
 }
 
-.marca-logo:hover {
-  filter: grayscale(0%) opacity(100%); 
-  transform: scale(1.08); 
+.marca-slide:hover {
+  filter: grayscale(0%) opacity(100%);
+  transform: scale(1.1);
 }
 
+/* A "mágica" que faz rodar infinitamente */
+@keyframes rolarMarcas {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } 
+  /* -50% porque duplicamos a lista, então quando chega na metade, ele reseta perfeito */
+}
+
+/* Ajuste para telas de celular */
 @media (max-width: 768px) {
-  .marcas-grid {
-    gap: 25px;
-  }
-  .marca-logo {
-    max-height: 35px;
-    max-width: 110px;
+  .marca-slide {
+    height: 30px !important;
+    margin: 0 25px;
   }
 }
-
