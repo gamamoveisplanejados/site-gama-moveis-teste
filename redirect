@@ -1,0 +1,6 @@
+# Forca o HTTPS e o WWW (vamos testar isso quando o dominio oficial entrar)
+http://gamamoveisplanejados.com.br/* https://www.gamamoveisplanejados.com.br/:splat 301!
+https://gamamoveisplanejados.com.br/* https://www.gamamoveisplanejados.com.br/:splat 301!
+
+# Garante o funcionamento das rotas
+/* /index.html 200
