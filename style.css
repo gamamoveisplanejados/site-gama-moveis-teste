@@ -197,4 +197,53 @@ footer { padding: 60px 5% 30px; background: #0a0a0a; color: #fff; border-top: 1p
 }
 
 
+/* --- ESTILO DAS MARCAS PARCEIRAS --- */
+.marcas-parceiras {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #fcfcfc; /* Fundo levemente cinza/gelo */
+  border-top: 1px solid #eaeaea;
+}
+
+.marcas-parceiras h2 {
+  font-size: 1.5rem;
+  color: #555;
+  margin-bottom: 40px;
+  font-weight: 500;
+}
+
+.marcas-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px; 
+  flex-wrap: wrap; 
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.marca-logo {
+  max-height: 45px; 
+  max-width: 140px;
+  object-fit: contain;
+  /* O mix-blend-mode remove o fundo branco dos arquivos JPG */
+  mix-blend-mode: multiply;
+  filter: grayscale(100%) opacity(70%); 
+  transition: all 0.3s ease; 
+}
+
+.marca-logo:hover {
+  filter: grayscale(0%) opacity(100%); 
+  transform: scale(1.08); 
+}
+
+@media (max-width: 768px) {
+  .marcas-grid {
+    gap: 25px;
+  }
+  .marca-logo {
+    max-height: 35px;
+    max-width: 110px;
+  }
+}
 
