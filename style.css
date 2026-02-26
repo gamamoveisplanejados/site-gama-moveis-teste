@@ -184,7 +184,46 @@ footer { padding: 60px 5% 30px; background: #0a0a0a; color: #fff; border-top: 1p
     letter-spacing: 1px;
     text-transform: uppercase;
 }
+/* Estilo do link do mapa no rodapé */
+.link-mapa {
+    display: inline-block;
+    margin-top: 15px;
+    color: #ffffff;
+    font-size: 0.85rem;
+    text-decoration: none;
+    border-bottom: 1px solid #555;
+    padding-bottom: 2px;
+    transition: all 0.3s ease;
+}
 
+.link-mapa i {
+    margin-right: 5px;
+    color: #25D366; /* Um toque de verde para chamar atenção */
+}
+
+.link-mapa:hover {
+    color: #25D366;
+    border-bottom-color: #25D366;
+}
+
+/* Ajuste fino dos ícones sociais */
+.footer-social {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.footer-social a {
+    color: #ffffff;
+    font-size: 1.3rem;
+    transition: all 0.3s ease;
+}
+
+/* Cores originais ao passar o mouse */
+.footer-social a[title="Instagram"]:hover { color: #E1306C; transform: translateY(-3px); }
+.footer-social a[title="Facebook"]:hover { color: #1877F2; transform: translateY(-3px); }
+.footer-social a[title="YouTube"]:hover { color: #FF0000; transform: translateY(-3px); }
+.footer-social a[title="TikTok"]:hover { color: #00f2fe; transform: translateY(-3px); }
 /* --- WHATSAPP --- */
 .whatsapp-container { position: fixed; bottom: 20px; right: 20px; z-index: 99999; display: flex; flex-direction: column; align-items: flex-end; }
 .whatsapp-message { background: #fff; color: #333; padding: 10px 15px; border-radius: 10px; font-size: 13px; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid #eee; }
@@ -250,3 +289,4 @@ footer { padding: 60px 5% 30px; background: #0a0a0a; color: #fff; border-top: 1p
     margin: 0 25px;
   }
 }
+
