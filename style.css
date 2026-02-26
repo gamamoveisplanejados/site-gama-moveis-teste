@@ -239,20 +239,20 @@ footer { padding: 60px 5% 30px; background: #0a0a0a; color: #fff; border-top: 1p
 /* --- ESTILO DAS MARCAS PARCEIRAS (ROLAGEM INFINITA) --- */
 .marcas-parceiras-scroll {
   width: 100%;
-  padding: 60px 0; /* O respiro correto em cima e embaixo */
-  background-color: #ffffff; /* Fundo branco para as logos */
+  height: 130px; /* Trava a altura exata da faixa branca */
+  background-color: #ffffff; 
   border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
   overflow: hidden; 
   position: relative;
-  /* (Apaguei os comandos que estavam espremendo as imagens) */
 }
 
 .marcas-track {
+  height: 100%; /* Ocupa 100% do espaço e força o alinhamento central */
   display: flex;
-  align-items: center;
-  width: max-content; /* Permite que a esteira seja maior que a tela */
-  animation: rolarMarcas 35s linear infinite; /* Tempo da animação */
+  align-items: center; 
+  width: max-content; 
+  animation: rolarMarcas 35s linear infinite; 
 }
 
 /* Opcional: Pausa a rolagem quando o cliente coloca o mouse em cima */
@@ -413,5 +413,6 @@ footer { padding: 60px 5% 30px; background: #0a0a0a; color: #fff; border-top: 1p
         justify-content: center;
     }
 }
+
 
 
