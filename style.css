@@ -239,12 +239,15 @@ footer { padding: 60px 5% 30px; background: #0a0a0a; color: #fff; border-top: 1p
 /* --- ESTILO DAS MARCAS PARCEIRAS (ROLAGEM INFINITA) --- */
 .marcas-parceiras-scroll {
   width: 100%;
-  padding: 40px 0;
-  background-color: #fcfcfc;
+  padding: 60px 0; /* Aumentei o espaço de 40px para 60px para dar mais respiro em cima e embaixo */
+  background-color: #ffffff; /* Fundo totalmente branco para sumir com os quadrados das fotos JPG */
   border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
-  overflow: hidden; /* Esconde o que sai da tela e tira a barra de rolagem */
+  overflow: hidden; 
   position: relative;
+  display: flex; /* Força a caixa a se comportar como um bloco flexível */
+  align-items: center; /* Trava as imagens verticalmente no centro absoluto */
+}
 }
 
 .marcas-track {
@@ -412,3 +415,4 @@ footer { padding: 60px 5% 30px; background: #0a0a0a; color: #fff; border-top: 1p
         justify-content: center;
     }
 }
+
