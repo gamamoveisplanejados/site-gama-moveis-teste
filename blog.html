@@ -1,53 +1,35 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGCETMTFHE"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-VGCETMTFHE');
-    </script>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | Gama Móveis Planejados</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body>
-    <header class="navbar">
-        <div class="logo-container">
-            <a href="index.html"><img src="https://github.com/jonascapixaba93/site-gama-moveis-teste/blob/main/Logo%20PNG%20Branca%20Hor.png?raw=true" alt="Gama" class="main-logo"></a>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="index.html#portfolio">Coleções</a></li>
-                <li><a href="https://wa.me/5528999176166" onclick="gtag('event', 'click', {'event_category': 'WhatsApp', 'event_label': 'Menu_Blog'});">Contato</a></li>
-            </ul>
-        </nav>
-    </header>
-
 <section class="blog-feed" style="padding-top: 150px; padding-bottom: 80px;">
-    <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+    <div class="container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
         
-        <article class="post-card" style="background: #fff; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
-            <img src="https://as2.ftcdn.net/jpg/05/08/06/87/1000_F_508068701_qCT18qk62BpQaIz2osP5h7aFs37NBuxD.jpg" alt="Móveis no Litoral" style="width: 100%; height: 250px; object-fit: cover; border-radius: 4px;">
-            <h3 style="margin: 20px 0 10px;">Móveis no Litoral: Guia de Durabilidade</h3>
-            <p style="font-size: 0.9rem; color: #666;">Saiba por que a escolha do material é vital em Marataízes.</p>
-            <a href="blog-maresia.html" onclick="gtag('event', 'select_content', {'item_id': 'guia_maresia'});" style="color: #a68a64; text-decoration: none; font-weight: 600; display: block; margin-top: 15px;">Ler Matéria Completa →</a>
+        <article class="post-card" style="background: #fff; padding: 20px; border: 1px solid #eee; border-radius: 8px; width: 350px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <img src="https://as2.ftcdn.net/jpg/05/08/06/87/1000_F_508068701_qCT18qk62BpQaIz2osP5h7aFs37NBuxD.jpg" alt="Móveis no Litoral" style="width: 100%; height: 230px; object-fit: cover; border-radius: 4px;">
+                <h3 style="margin: 20px 0 10px; min-height: 50px;">Móveis no Litoral: Guia de Durabilidade</h3>
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Saiba por que a escolha do material é vital em Marataízes.</p>
+            </div>
+            <a href="blog-maresia.html" onclick="gtag('event', 'select_content', {'item_id': 'guia_maresia'});" style="color: #a68a64; text-decoration: none; font-weight: 600;">Ler Matéria Completa →</a>
         </article>
 
-        <article class="post-card" style="background: #fff; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
-            <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=600" alt="Cozinha Integrada" style="width: 100%; height: 250px; object-fit: cover; border-radius: 4px;">
-            <h3 style="margin: 20px 0 10px;">Cozinha Integrada: Valorize seu Imóvel</h3>
-            <p style="font-size: 0.9rem; color: #666;">Como o design inteligente pode elevar o valor da sua casa em até 30%.</p>
-            <a href="blog-cozinha.html" onclick="gtag('event', 'select_content', {'item_id': 'guia_cozinha'});" style="color: #a68a64; text-decoration: none; font-weight: 600; display: block; margin-top: 15px;">Ler Matéria Completa →</a>
+        <article class="post-card" style="background: #fff; padding: 20px; border: 1px solid #eee; border-radius: 8px; width: 350px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=600" alt="Cozinha Integrada" style="width: 100%; height: 230px; object-fit: cover; border-radius: 4px;">
+                <h3 style="margin: 20px 0 10px; min-height: 50px;">Cozinha Integrada: Valorize seu Imóvel</h3>
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Como o design inteligente pode elevar o valor da sua casa em até 30%.</p>
+            </div>
+            <a href="blog-cozinha.html" onclick="gtag('event', 'select_content', {'item_id': 'guia_cozinha'});" style="color: #a68a64; text-decoration: none; font-weight: 600;">Ler Matéria Completa →</a>
         </article>
 
-        <article class="post-card" style="background: #fff; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
-            <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?q=80&w=600" alt="Tendências 2026" style="width: 100%; height: 250px; object-fit: cover; border-radius: 4px;">
-            <h3 style="margin: 20px 0 10px;">Tendências de Planejados para
+        <article class="post-card" style="background: #fff; padding: 20px; border: 1px solid #eee; border-radius: 8px; width: 350px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?q=80&w=600" alt="Tendências 2026" style="width: 100%; height: 230px; object-fit: cover; border-radius: 4px;">
+                <h3 style="margin: 20px 0 10px; min-height: 50px;">Tendências de Planejados para 2026</h3>
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Descubra o que está em alta: cores, materiais e iluminação para o seu lar.</p>
+            </div>
+            <a href="tendencias-moveis-planejados-2026.html" onclick="gtag('event', 'select_content', {'item_id': 'tendencias_2026'});" style="color: #a68a64; text-decoration: none; font-weight: 600;">Ler Matéria Completa →</a>
+        </article>
+
+        <article class="post-card" style="background: #fff; padding: 20px; border: 1px solid #eee; border-radius: 8px; width: 350px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <img src="https://github.com/gamamoveisplanejados/site-gama-moveis-teste/blob/main/projeto%20blog%20.png?raw=true" alt="Apartamento Pequeno" style="width: 100%; height: 230px; object-fit: cover; border-radius: 4px;">
+                <h3 style="margin: 20px 0 10px; min-height: 50px;">Ganhe Espaço em Apês Pequenos</h3>
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">4 dicas práticas que
