@@ -11,102 +11,124 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Inteligência do Espaço: Guia Definitivo para Apartamentos Compactos | Gama Móveis</title>
+    <title>Engenharia de Espaços Compactos | Gama Móveis Planejados</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #fff; color: #333; line-height: 2; font-family: 'Montserrat', sans-serif; }
-        .article-container { max-width: 850px; margin: 0 auto; padding: 100px 25px; }
-        .meta-info { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: #a68a64; margin-bottom: 20px; text-align: center; font-weight: 600;}
-        h1 { font-weight: 200; font-size: 3rem; line-height: 1.1; text-align: center; margin-bottom: 60px; text-transform: uppercase; letter-spacing: 4px; color: #1a1a1a;}
-        h2 { font-weight: 400; font-size: 2rem; margin: 80px 0 40px; color: #1a1a1a; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #eee; padding-bottom: 15px;}
-        h3 { font-weight: 600; font-size: 1.3rem; margin: 40px 0 20px; color: #a68a64; text-transform: uppercase; }
-        p { margin-bottom: 35px; font-size: 1.2rem; color: #444; text-align: justify; hyphens: auto;}
-        .image-full { width: 100%; border-radius: 0; margin: 60px 0; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
-        .quote-box { border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 60px 40px; margin: 70px 0; font-style: italic; font-size: 1.4rem; text-align: center; color: #1a1a1a; line-height: 1.6; background: #fcfcfc; }
-        .btn-cta { display: block; width: fit-content; margin: 80px auto; padding: 25px 60px; border: 1px solid #a68a64; color: #a68a64; text-decoration: none; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 4px; transition: 0.4s; font-weight: 600; }
-        .btn-cta:hover { background: #a68a64; color: #fff; transform: translateY(-3px); }
-        .highlight-box { background: #f9f9f9; padding: 40px; border-radius: 4px; margin: 40px 0; border-left: 5px solid #a68a64; }
+        body { background-color: #fff; color: #333; line-height: 2.1; font-family: 'Montserrat', sans-serif; margin: 0; }
+        
+        /* Cabeçalho Preto de Destaque */
+        .hero-header { background: #1a1a1a; padding: 120px 25px 80px; text-align: center; color: #fff; }
+        .hero-header .meta-info { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; color: #a68a64; margin-bottom: 30px; display: block; font-weight: 600; }
+        .hero-header h1 { font-weight: 200; font-size: 3.2rem; line-height: 1.2; margin: 0 auto; max-width: 900px; text-transform: uppercase; letter-spacing: 5px; }
+
+        .article-container { max-width: 850px; margin: 0 auto; padding: 80px 25px; }
+        
+        h2 { font-weight: 400; font-size: 2.2rem; margin: 90px 0 40px; color: #1a1a1a; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #eee; padding-bottom: 20px;}
+        h3 { font-weight: 600; font-size: 1.4rem; margin: 50px 0 25px; color: #a68a64; text-transform: uppercase; letter-spacing: 1px; }
+        
+        p { margin-bottom: 40px; font-size: 1.25rem; color: #444; text-align: justify; hyphens: auto;}
+        
+        .image-full { width: 100%; border-radius: 0; margin: 60px 0; box-shadow: 0 25px 60px rgba(0,0,0,0.08); }
+        
+        .quote-box { border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 70px 50px; margin: 80px 0; font-style: italic; font-size: 1.5rem; text-align: center; color: #1a1a1a; line-height: 1.6; background: #fafafa; position: relative; }
+        .quote-box::before { content: '"'; font-size: 5rem; color: #a68a64; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); opacity: 0.2; }
+
+        .highlight-card { background: #1a1a1a; color: #fff; padding: 50px; margin: 60px 0; border-radius: 2px; }
+        .highlight-card h4 { color: #a68a64; text-transform: uppercase; margin-top: 0; letter-spacing: 2px; }
+
+        .btn-cta { display: block; width: fit-content; margin: 80px auto; padding: 25px 70px; border: 1px solid #a68a64; color: #a68a64; text-decoration: none; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 4px; transition: 0.4s; font-weight: 600; }
+        .btn-cta:hover { background: #a68a64; color: #fff; }
     </style>
 </head>
 <body>
 
-    <header class="navbar" style="background: #000; height: 80px; display: flex; align-items: center; justify-content: center; position: fixed; width: 100%; top: 0; z-index: 1000;">
-         <a href="index.html"><img src="https://github.com/jonascapixaba93/site-gama-moveis-teste/blob/main/Logo%20PNG%20Branca%20Hor.png?raw=true" style="height: 40px;"></a>
+    <header class="navbar" style="background: rgba(0,0,0,0.9); height: 70px; display: flex; align-items: center; justify-content: center; position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid #333;">
+         <a href="index.html"><img src="https://github.com/jonascapixaba93/site-gama-moveis-teste/blob/main/Logo%20PNG%20Branca%20Hor.png?raw=true" style="height: 35px;"></a>
+    </header>
+
+    <header class="hero-header">
+        <span class="meta-info">Artigo Técnico • Especial Planejados 2026</span>
+        <h1>Como fazer um apartamento pequeno parecer maior?</h1>
     </header>
 
     <div class="article-container">
-        <div class="meta-info">Arquitetura de Interiores • Engenharia de Mobiliário • Design Funcional</div>
-        <h1>Como fazer um apartamento pequeno parecer maior?</h1>
+        
+        <p style="font-size: 1.6rem; color: #1a1a1a; line-height: 1.6; font-weight: 200; text-align: center; margin-bottom: 80px;">A volumetria inteligente e a neuroarquitetura aplicadas ao mobiliário: como transformar m² limitados em ambientes de alta performance e sofisticação.</p>
 
-        <p style="font-size: 1.5rem; color: #1a1a1a; line-height: 1.6; font-weight: 200; text-align: center; margin-bottom: 60px;">O desafio de habitar espaços reduzidos exige mais do que apenas móveis; exige uma reengenharia da rotina e uma compreensão profunda da volumetria arquitetônica.</p>
+        <p>Vivemos uma era onde o conceito de luxo foi ressignificado. Se há algumas décadas a ostentação estava ligada à metragem quadrada e aos excessos decorativos, hoje o luxo é sinônimo de **inteligência espacial e tempo**. Em mercados imobiliários em franca expansão, como Marataízes e o Sul do Espírito Santo, os apartamentos compactos surgem como uma resposta prática e dinâmica à vida urbana, mas trazem consigo um desafio técnico monumental para a marcenaria sob medida.</p>
 
-        <p>Atualmente, o mercado imobiliário enfrenta um fenômeno global: a verticalização e a compactação das unidades residenciais. Em cidades litorâneas e centros em expansão, como Marataízes e Cachoeiro de Itapemirim, os apartamentos compactos tornaram-se a escolha preferencial de jovens profissionais e investidores. No entanto, o termo "apartamento pequeno" frequentemente carrega um estigma de desconforto que, na realidade, é apenas o resultado de um projeto mal executado.</p>
+        <p>O "apartamento ovo", termo popularizado para descrever unidades com áreas reduzidas, exige do projetista uma visão que vai além do desenho de móveis; exige uma compreensão de fluxos antropométricos. Na Gama Móveis Planejados, cada projeto começa com uma análise do comportamento do usuário. Afinal, um espaço pequeno não é o problema — o problema é um espaço que não entende quem habita nele. Para alcançar a sensação de amplitude, precisamos manipular a percepção sensorial através de quatro pilares práticos.</p>
 
-        <p>A arquitetura de interiores moderna propõe que a percepção de espaço não está ligada à metragem quadrada bruta, mas sim à **fluidez visual** e à eficiência com que os fluxos de passagem e armazenamento são geridos. Na Gama Móveis Planejados, encaramos cada "apartamento ovo" não como uma limitação, mas como um quebra-cabeça de engenharia e design que, quando resolvido, oferece uma qualidade de vida superior a muitas residências amplas porém mal aproveitadas.</p>
+        <h2>1. Neuroarquitetura: O Mobiliário como Ferramenta de Organização Oculta</h2>
+        <p>A neuroarquitetura estuda como o ambiente físico impacta diretamente nosso sistema nervoso. Em um ambiente saturado de informações visuais (objetos fora do lugar, vãos abertos, excesso de texturas), o cérebro entra em um estado de micro-estresse, o que gera a sensação de confinamento. Por isso, a primeira regra de ouro para ganhar espaço é: **se não é decorativo, deve ser oculto**.</p>
 
-        <h2>1. A Engenharia do Armazenamento Oculto</h2>
-        <p>O primeiro pilar da ampliação espacial é o controle do caos visual. Em metragens reduzidas, cada objeto exposto consome uma parcela da "atenção" do olhar, fazendo com que o cérebro processe o ambiente como algo saturado e, consequentemente, menor. A solução reside no que chamamos de **Mobiliário de Performance**, capaz de ocultar a rotina enquanto mantém a estética impecável.</p>
+        <img src="https://github.com/gamamoveisplanejados/site-gama-moveis-teste/blob/main/home%20ofice.png?raw=true" class="image-full" alt="Escritório Inteligente Gama">
 
-        <img src="https://github.com/gamamoveisplanejados/site-gama-moveis-teste/blob/main/home%20ofice.png?raw=true" class="image-full" alt="Engenharia de Armazenamento Gama">
+        <h3>O Conceito de "Mobiliário Camaleão"</h3>
+        <p>Trabalhamos com o que chamamos de marcenaria de transição. Sabe aquele home office que você precisa durante o dia, mas que te lembra do trabalho à noite? Através de sistemas de portas escamoteáveis ou mesas retráteis com ferragens de alta performance, criamos escritórios que "somem" dentro de armários. Ao fechar uma porta, o ambiente volta a ser uma sala de estar limpa e relaxante. Essa mutabilidade permite que um único cômodo desempenhe múltiplas funções sem acumular volume visual.</p>
 
-        <h3>Otimização Horizontal e Vertical</h3>
-        <p>Diferente do mobiliário de varejo, que deixa vãos inúteis acima de armários e nas laterais de vigas, a marcenaria técnica utiliza o fechamento total. Ao levar um armário até o teto, criamos uma linha vertical contínua que "puxa" o olhar para cima, aumentando a percepção do pé-direito. Internamente, este espaço é reservado para o armazenamento de longo prazo — malas, roupas de inverno e enxovais — liberando as áreas de fácil acesso para o dia a dia.</p>
-
-        <p>Outro exemplo vital é a cama com sistema de baú integrado ou gavetões laterais. Em um quarto de 9m², uma cama ocupa quase 40% da área útil. Não utilizar o volume abaixo do colchão é um desperdício de engenharia. Transformamos esse volume em um guarda-roupa horizontal, capaz de abrigar itens volumosos sem ocupar um milímetro extra de circulação.</p>
+        <p>Outro ponto crítico é o aproveitamento da **Zona de Armazenamento Morto**. Camas com baú são fundamentais, mas na Gama elevamos esse conceito. Utilizamos pistões a gás reforçados que permitem a abertura fácil do colchão, transformando o vão inferior em um closet horizontal. Para o Google e para o seu bem-estar, explicamos: liberar o armário principal de itens sazonais (como malas e edredons) permite que o guarda-roupa seja mais slim, deixando mais área livre para você circular.</p>
 
         <div class="quote-box">
             "Design bom é aquele que resolve a vida real. Não adianta a casa ser bonita se não tem lugar para guardar o balde, o aspirador ou a tábua de passar." <br><strong>— Maurício Arruda</strong>
         </div>
 
-        <h2>2. Integração e Transição Visual: A Cozinha como Protagonista</h2>
-        <p>A cozinha integrada, ou "cozinha americana", deixou de ser um conceito estético para se tornar uma necessidade estrutural. Ao removermos a barreira física entre a área de preparo e a área de convivência, permitimos que o olhar percorra toda a extensão do imóvel sem interrupções. No entanto, a integração exige uma linguagem visual coesa.</p>
+        <h2>2. Cozinha Integrada e a Continuidade de Linguagem</h2>
+        <p>A integração de ambientes é a estratégia mais óbvia, porém a mais mal executada. Muitos proprietários derrubam a parede da cozinha, mas instalam móveis que não "conversam" com a sala. O resultado é um ambiente fragmentado que parece ainda menor.</p>
 
-        <img src="https://github.com/gamamoveisplanejados/site-gama-moveis-teste/blob/main/coznha%20e%20sala%20integrada.png?raw=true" class="image-full" alt="Cozinha Integrada Conceito">
+        <img src="https://github.com/gamamoveisplanejados/site-gama-moveis-teste/blob/main/coznha%20e%20sala%20integrada.png?raw=true" class="image-full" alt="Cozinha Integrada Gama Móveis">
 
-        <p>Na Gama Móveis, trabalhamos a cozinha integrada como uma extensão da sala de estar. Isso significa utilizar acabamentos que conversem entre si. Se o painel da TV utiliza um amadeirado como o Freijó, levamos esse mesmo padrão para os nichos da cozinha, criando o que chamamos de **Unidade Material**. Essa continuidade engana o cérebro, fazendo-o acreditar que os dois ambientes são, na verdade, um único grande salão.</p>
+        <h3>A Unidade Material como Ampliador Visual</h3>
+        <p>Para o apartamento parecer maior, o chão e os móveis devem seguir uma linha contínua. Se utilizamos um MDF amadeirado na estante da sala, ele deve estar presente em detalhes da cozinha. Essa repetição de padrões faz com que o olho não identifique onde termina um cômodo e começa o outro. Na Gama Móveis, sugerimos armários que alcancem o teto. O fechamento superior, além de evitar o acúmulo de gordura e poeira, alonga a parede, criando uma ilusão de pé-direito elevado.</p>
 
-        <div class="highlight-box">
-            <p><strong>Dica de Especialista:</strong> O balcão de integração deve ser multifuncional. Desenhamos bancadas que servem de mesa para refeições rápidas, área de preparo gourmet e, na parte inferior, nichos inteligentes para eletrodomésticos ou adegas. É o design servindo a múltiplas funções em uma única estrutura.</p>
+        <p>O balcão multifuncional é o herói desta integração. Ele deve ser desenhado para ser uma estação de trabalho, mesa de jantar e suporte para o preparo de alimentos. Projetamos balcões com nichos invertidos, onde o lado voltado para a sala abriga decorações e o lado da cozinha abriga utensílios. Essa dupla função economiza a compra de dois ou três móveis separados.</p>
+
+        <div class="highlight-card">
+            <h4>Dica de Engenharia Gama:</h4>
+            <p>Em cozinhas compactas, cada milímetro de profundidade conta. Utilizamos ferragens que permitem a abertura total das gavetas (corrediças telescópicas de extração total), garantindo que você aproveite o fundo do armário sem precisar "mergulhar" nele. Organização gera espaço.</p>
         </div>
 
-        <p>A ergonomia, citada por Ernst Neufert, é o que garante que essa integração não se torne uma confusão de fluxos. Respeitamos as medidas de passagem mínimas de 90cm, garantindo que mesmo em um apartamento compacto, a circulação seja livre e confortável, sem o risco de "esbarrões" constantes.</p>
+        <h2>3. O Estudo da Luz: Cromoterapia e Reflexão Estética</h2>
+        <p>O espaço não é definido por paredes, mas por como a luz as atinge. Um apartamento com pouca luz natural sempre parecerá menor. Para combater isso, aplicamos a tríade: Cores Claras, Espelhos e Iluminação Técnica.</p>
 
-        <h2>3. A Psicologia das Cores e a Magia dos Espelhos</h2>
-        <p>A percepção espacial é, em grande parte, uma construção sensorial baseada na reflexão da luz. Cores escuras tendem a absorver a luminosidade, aproximando as paredes e "fechando" o ambiente. Por outro lado, tons claros e superfícies reflexivas expandem esses limites.</p>
+        <img src="https://github.com/gamamoveisplanejados/site-gama-moveis-teste/blob/main/cozinha%20com%20espelho.png?raw=true" class="image-full" alt="Amplitude Visual Gama">
 
-        <img src="https://github.com/gamamoveisplanejados/site-gama-moveis-teste/blob/main/cozinha%20com%20espelho.png?raw=true" class="image-full" alt="Amplitude com Espelhos">
+        <p>Cores como o Off-White, Bege e o cinza "Cashmere" são fundamentais. Elas têm um alto índice de refletância. Já o espelho deve ser aplicado com propósito arquitetônico. Colocar um espelho na frente de uma parede vazia não ajuda em nada. O espelho deve estar de frente para uma janela ou para um ambiente integrado para "trazer" o exterior para dentro. Na marcenaria da Gama, utilizamos muito as frentes em vidro Reflecta — eles têm um brilho sofisticado que reflete o ambiente, mas mantêm uma transparência elegante quando a luz interna é acesa.</p>
 
-        <p>O uso de espelhos é, talvez, o truque mais antigo e eficaz da arquitetura de interiores, mas sua aplicação deve ser estratégica. Um espelho do chão ao teto, posicionado perpendicularmente a uma janela, não apenas dobra o tamanho visual da sala, mas também redistribui a luz natural para os cantos mais escuros do apartamento. Na marcenaria, aplicamos o espelho em portas de correr de roupeiros e frentes de armários superiores, eliminando o peso visual de grandes superfícies de madeira.</p>
+        <p>A iluminação em LED é o que chamamos de "escultura de luz". Colocar fitas de LED sob os armários superiores ou no rodapé cria uma linha de luz que separa o móvel do chão e do teto. Isso dá a sensação de leveza, como se os móveis estivessem flutuando. Para o cérebro, um móvel que "flutua" ocupa menos espaço do que um móvel pesado e escuro que vai direto ao chão.</p>
 
         <div class="quote-box">
-            "O verdadeiro luxo hoje em dia é ter espaço e luz. Se o seu apê é pequeno, use cores que acalmam os olhos e espelhos que trazem claridade. É isso que traz aquela sensação de liberdade dentro de casa." <br><strong>— Cristiana Arcangeli</strong>
+            "O verdadeiro luxo hoje em dia é ter espaço e luz. Se o seu apê é pequeno, use cores que acalmam os olhos e espelhos que trazem claridade." <br><strong>— Cristiana Arcangeli</strong>
         </div>
 
-        <p>A iluminação em LED embutida entra como o toque final de mestre. Ao iluminar o rodapé ou o topo dos armários, criamos a ilusão de que o móvel está flutuando, o que traz leveza ao conjunto. Luzes direcionais sob os armários da cozinha eliminam as sombras sobre a bancada, ampliando a profundidade visual da área de trabalho.</p>
-
-        <h2>4. O Valor do Planejamento Milimétrico</h2>
-        <p>Muitas pessoas questionam o custo-benefício de investir em marcenaria sob medida em um imóvel alugado ou pequeno. A resposta reside na matemática do aproveitamento. Ao comprar um móvel pronto, você inevitavelmente perderá espaços preciosos. Aquele vão de 15cm entre o guarda-roupa e a parede é um espaço perdido que você pagou na compra do imóvel, mas que não está usando.</p>
+        <h2>4. Valor Patrimonial: Por que o Sob Medida é um Investimento Financeiro?</h2>
+        <p>Existe um erro comum em pensar apenas no custo imediato. O móvel pronto é barato no dia da compra, mas caríssimo no longo prazo. Ele não se adapta às colunas do prédio, deixa frestas onde acumulam sujeira e, principalmente, não aproveita a área útil. Se você pagou R$ 300.000 em um apartamento de 50m², cada metro quadrado custou R$ 6.000. Se o seu guarda-roupa pronto deixa 2m² de vãos inúteis, você está jogando R$ 12.000 no lixo.</p>
 
         <img src="https://github.com/gamamoveisplanejados/site-gama-moveis-teste/blob/main/projeto%20blog%20.png?raw=true" class="image-full" alt="Projeto Técnico Gama">
 
-        <p>O planejamento milimétrico permite "abraçar" pilares, vigas e irregularidades das paredes. Na Gama Móveis, cada projeto é uma peça única de engenharia. Utilizamos softwares de ponta para garantir que cada gaveta e cada prateleira sejam posicionadas para maximizar a capacidade de carga e a facilidade de acesso.</p>
+        <p>A marcenaria técnica da Gama Móveis utiliza o conceito de **Personalização Estrutural**. Nós contornamos vigas e pilares, transformando o que seria um obstáculo em uma prateleira ou um nicho decorativo. Isso valoriza o imóvel. Um apartamento planejado é vendido 40% mais rápido do que um vazio, e o valor de revenda sobe consideravelmente porque o comprador enxerga uma solução pronta, e não um problema para resolver.</p>
 
-        <p>Além da funcionalidade imediata, existe o fator de valorização imobiliária. Dados do mercado mostram que um apartamento de 40m² totalmente planejado e bem resolvido pode ter um valor de liquidez até 20% superior a um similar vazio. Quem compra ou aluga busca facilidade; eles buscam um lar onde a Marie Kondo ficaria orgulhosa, onde tudo tem seu lugar definido e a paz visual é garantida.</p>
+        <h3>Ferragens e Durabilidade no Litoral</h3>
+        <p>Em Marataízes, temos o desafio extra da maresia. Um móvel de baixa qualidade estufa e perde as dobradiças em poucos meses. Na Gama, utilizamos ferragens com proteção especial e chapas de MDF com densidade correta para resistir à umidade. Isso é economia: comprar uma vez algo que dura 20 anos, em vez de trocar o mobiliário a cada 3 anos.</p>
 
-        <h2>Conclusão: Transformando o Morar</h2>
-        <p>Viver bem em um apartamento pequeno não é sobre abrir mão de conforto, mas sobre adotar a inteligência do design. Ao unir as referências técnicas de Neufert com a praticidade de Rita Lobo e o olhar estético de Maurício Arruda, criamos espaços que desafiam a própria metragem.</p>
+        <h2>Conclusão: O Papel da Inspiração Técnica</h2>
+        <p>Nossa metodologia não nasceu do acaso. Baseamos nossos projetos em referências mundiais de organização e ergonomia:</p>
+        <ul style="margin-bottom: 50px;">
+            <li><strong>Marie Kondo:</strong> O princípio de que a felicidade está ligada ao desapego do supérfluo e à ordem rigorosa.</li>
+            <li><strong>Maurício Arruda:</strong> A aplicação do design democrático e real, focado no brasileiro.</li>
+            <li><strong>Ernst Neufert:</strong> O "pai da ergonomia", cujas medidas padrão garantem que você nunca se sinta "apertado" em um móvel desenhado por nós.</li>
+        </ul>
 
-        <p>Cada projeto na Gama Móveis é uma oportunidade de provar que a sofisticação habita os detalhes e as soluções inteligentes. Se você sente que seu apartamento está diminuindo, talvez o que falte não seja espaço, mas um planejamento que entenda a sua rotina.</p>
+        <p>Viver em um apartamento pequeno é uma escolha moderna de praticidade. Mas para essa escolha ser prazerosa, a marcenaria precisa ser a sua maior aliada. Cada parede vazia na sua casa é um potencial de conforto que você ainda não explorou.</p>
 
-        <a href="https://wa.me/5528999176166" class="btn-cta">Transformar meu espaço agora</a>
+        <a href="https://wa.me/5528999176166" class="btn-cta">Consultar Projetista Especialista</a>
     </div>
 
-    <footer style="padding: 80px 5%; background: #f9f9f9; text-align: center; border-top: 1px solid #eee;">
-        <img src="https://github.com/jonascapixaba93/site-gama-moveis-teste/blob/main/Logo%20PNG%20Branca%20Hor.png?raw=true" style="height: 35px; filter: invert(1); opacity: 0.4;">
-        <p style="font-size: 0.75rem; margin-top: 30px; color: #999; letter-spacing: 2px;">© 2026 GAMA MÓVEIS PLANEJADOS | MARATAÍZES - ES</p>
+    <footer style="padding: 80px 5%; background: #1a1a1a; text-align: center; color: #666; border-top: 1px solid #333;">
+        <img src="https://github.com/jonascapixaba93/site-gama-moveis-teste/blob/main/Logo%20PNG%20Branca%20Hor.png?raw=true" style="height: 35px; opacity: 0.3; margin-bottom: 30px;">
+        <p style="font-size: 0.8rem; letter-spacing: 2px;">© 2026 GAMA MÓVEIS PLANEJADOS | MARATAÍZES - ESPÍRITO SANTO</p>
     </footer>
 
-    <script>lucide.createIcons();</script>
 </body>
 </html>
