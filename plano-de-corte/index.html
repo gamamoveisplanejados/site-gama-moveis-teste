@@ -1,1 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Nesting Pro - Otimizador de Corte para CNC</title>
+    
+    <!-- CONEXÃO COM O SEU ARQUIVO CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="app">
+        <!-- Header Moderno -->
+        <header class="app-header">
+            <div class="header-container">
+                <div class="logo-area">
+                    <div class="logo-icon">✂️</div>
+                    <div class="logo-text">
+                        <h1>Nesting Pro</h1>
+                        <span>Otimizador de Corte para CNC</span>
+                    </div>
+                </div>
+                <div class="header-stats">
+                    <div class="stat-badge">
+                        <span class="badge-label">Versão</span>
+                        <span class="badge-value">2.0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
 
+        <main>
+            <div class="optimizer-container">
+                <!-- Barra de Ferramentas Superior -->
+                <div class="toolbar">
+                    <button class="tool-btn" id="newCalcBtn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                        Novo Cálculo
+                    </button>
+                    <div class="toolbar-divider"></div>
+                    <button class="tool-btn" id="optimizeBtn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h8l-2 8 10-12h-8l2-8z"/></svg>
+                        Gerar Plano de Corte
+                    </button>
+                </div>
+
+                <!-- Layout Principal em Grid -->
+                <div class="main-grid">
+                    <!-- Coluna Esquerda - Parâmetros -->
+                    <div class="left-panel">
+                        <!-- Configurações do Material -->
+                        <div class="panel-card">
+                            <div class="card-header">
+                                <div class="card-icon">📦</div>
+                                <h3>Material</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="param-row">
+                                    <label>Espessura da Chapa</label>
+                                    <div class="chip-group">
+                                        <span class="chip" data-thickness="6">6mm</span>
+                                        <span class="chip" data-thickness="15">15mm</span>
+                                        <span class="chip active" data-thickness="18">18mm</span>
+                                    </div>
+                                </div>
+                                <div class="param-row">
+                                    <label>Espessura da Serra</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="bladeThickness" min="0" max="10" step="0.5" value="3">
+                                        <span id="bladeValue" class="slider-value">3.0 mm</span>
+                                    </div>
+                                </div>
+                                <div class="param-row">
+                                    <label>Dimensão da Chapa</label>
+                                    <div class="dimension-inputs">
+                                        <input type="number" id="sheetWidth" value="2750" placeholder="Largura">
+                                        <span>×</span>
+                                        <input type="number" id="sheetHeight" value="1850" placeholder="Altura">
+                                        <span>mm</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Seleção de Materiais -->
+                        <div class="panel-card">
+                            <div class="card-header">
+                                <div class="card-icon">🎨</div>
+                                <h3>Materiais Disponíveis</h3>
+                            </div>
+                            <div class="card-content">
+                                <div id="materialsGrid" class="materials-grid"></div>
+                            </div>
+                        </div>
+
+                        <!-- Adicionar Peça -->
+                        <div class="panel-card">
+                            <div class="card-header">
+                                <div class="card-icon">➕</div>
+                                <h3>Adicionar Nova Peça</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="add-part-form">
+                                    <div class="form-row">
+                                        <input type="text" id="partName" placeholder="Etiqueta (ex: Frente Armário)" class="form-input">
+                                    </div>
+                                    <div class="form-row-3">
+                                        <div class="input-group">
+                                            <label>Base</label>
+                                            <input type="number" id="partWidth" placeholder="0" step="1" min="1">
+                                            <span class="input-unit">mm</span>
+                                        </div>
+                                        <div class="input-group">
+                                            <label>Altura</label>
+                                            <input type="number" id="partHeight" placeholder="0" step="1" min="1">
+                                            <span class="input-unit">mm</span>
+                                        </div>
+                                        <div class="input-group">
+                                            <label>Qtd</label>
+                                            <input type="number" id="partQuantity" value="1" step="1" min="1">
+                                        </div>
+                                    </div>
+                                    <button id="addPartBtn" class="btn-primary">+ Adicionar Peça</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coluna Direita - Lista de Peças -->
+                    <div class="right-panel">
+                        <div class="panel-card parts-panel">
+                            <div class="card-header">
+                                <div class="card-icon">📋</div>
+                                <h3>Lista de Peças</h3>
+                                <span id="partsCount" class="badge">0</span>
+                            </div>
+                            <div class="card-content">
+                                <div id="partsTable" class="parts-table-container">
+                                    <div class="empty-state">
+                                        <div class="empty-icon">📭</div>
+                                        <p>Sua lista está vazia</p>
+                                        <span>Adicione peças abaixo para começar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Área de Resultados -->
+                <div id="resultDisplay" class="result-area" style="display: none;"></div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <div class="footer-content">
+                <span>© 2024 Nesting Pro - Otimizador de Corte para CNC Router</span>
+                <span class="footer-version">v2.0</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- CONEXÃO COM O SEU ARQUIVO JS -->
+    <script src="script.js"></script>
+</body>
+</html>
