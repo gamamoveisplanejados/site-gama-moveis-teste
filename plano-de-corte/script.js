@@ -7,28 +7,31 @@ let state = {
 };
 
 const availableMaterials = [
-    { id: 1, name: 'Branco', color: '#FFFFFF', code: 'BRANCO', textColor: '#333' },
-    { id: 2, name: 'Preto', color: '#1a1a1a', code: 'PRETO', textColor: '#fff' },
-    { id: 3, name: 'Carvalho', color: '#8B6914', code: 'CARVALHO', textColor: '#fff' },
-    { id: 4, name: 'Nogueira', color: '#5C4033', code: 'NOGUEIRA', textColor: '#fff' },
-    { id: 5, name: 'Cerejeira', color: '#DEB887', code: 'CEREJEIRA', textColor: '#333' },
-    { id: 6, name: 'Freijó', color: '#C4A35A', code: 'FREIJO', textColor: '#333' },
-    { id: 7, name: 'Branco Neve', color: '#F0F0F0', code: 'BRANCO_NEVE', textColor: '#333' },
-    { id: 8, name: 'Cinza', color: '#808080', code: 'CINZA', textColor: '#fff' },
-    { id: 9, name: 'Azul', color: '#4169E1', code: 'AZUL', textColor: '#fff' },
-    { id: 10, name: 'Vermelho', color: '#DC143C', code: 'VERMELHO', textColor: '#fff' }
+    { id: 1, name: 'Branco', color: '#FFFFFF', code: 'BRANCO' },
+    { id: 2, name: 'Preto', color: '#1a1a1a', code: 'PRETO' },
+    { id: 3, name: 'Carvalho', color: '#8B6914', code: 'CARVALHO' },
+    { id: 4, name: 'Nogueira', color: '#5C4033', code: 'NOGUEIRA' },
+    { id: 5, name: 'Cerejeira', color: '#DEB887', code: 'CEREJEIRA' },
+    { id: 6, name: 'Freijó', color: '#C4A35A', code: 'FREIJO' },
+    { id: 7, name: 'Branco Neve', color: '#F0F0F0', code: 'BRANCO_NEVE' },
+    { id: 8, name: 'Cinza', color: '#808080', code: 'CINZA' },
+    { id: 9, name: 'Azul', color: '#4169E1', code: 'AZUL' },
+    { id: 10, name: 'Vermelho', color: '#DC143C', code: 'VERMELHO' }
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
     initEventListeners();
     renderMaterialsGrid();
     renderPartsTable();
+    
+    document.getElementById('scrollToOptimizer').addEventListener('click', () => {
+        document.getElementById('optimizer').scrollIntoView({ behavior: 'smooth' });
+    });
 });
 
 function initEventListeners() {
     document.getElementById('addPartBtn').addEventListener('click', addPart);
     document.getElementById('optimizeBtn').addEventListener('click', calculateOptimalCutting);
-    document.getElementById('newCalcBtn').addEventListener('click', resetCalculation);
     
     document.querySelectorAll('.thickness-option').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -39,7 +42,7 @@ function initEventListeners() {
     
     const bladeSlider = document.getElementById('bladeThickness');
     bladeSlider.addEventListener('input', (e) => {
-        document.getElementById('bladeValue').textContent = e.target.value;
+        document.getElementById('bladeValue').textContent = e.target.value + ' mm';
     });
     
     document.getElementById('sheetWidth').addEventListener('change', (e) => {
@@ -50,18 +53,12 @@ function initEventListeners() {
     });
 }
 
-function resetCalculation() {
-    state.parts = [];
-    state.cuttingResult = null;
-    renderPartsTable();
-    document.getElementById('resultDisplay').style.display = 'none';
-}
-
 function renderMaterialsGrid() {
-    const grid = document.getElementById('materialsGrid');
+    const grid = document.querySelector('.materials-list');
+    if (!grid) return;
+    
     grid.innerHTML = availableMaterials.map(material => `
-        <div class="material-card ${state.selectedMaterials.includes(material.code) ? 'selected' : ''}"
-             style="background: ${state.selectedMaterials.includes(material.code) ? `linear-gradient(135deg, ${material.color}20, ${material.color}10)` : 'var(--bg-tertiary)'}; color: ${material.textColor}"
+        <div class="material-item ${state.selectedMaterials.includes(material.code) ? 'selected' : ''}"
              onclick="toggleMaterial('${material.code}')">
             <span>${material.name}</span>
             ${state.selectedMaterials.includes(material.code) ? '<span>✓</span>' : ''}
@@ -112,16 +109,20 @@ function removePart(id) {
 }
 
 function renderPartsTable() {
-    const container = document.getElementById('partsTable');
+    const container = document.querySelector('.parts-list-container');
     const countSpan = document.getElementById('partsCount');
     countSpan.textContent = state.parts.length;
 
     if (state.parts.length === 0) {
         container.innerHTML = `
-            <div class="empty-state">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+            <div class="empty-list">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <line x1="9" y1="9" x2="15" y2="15"/>
+                    <line x1="15" y1="9" x2="9" y2="15"/>
+                </svg>
                 <p>Nenhuma peça adicionada</p>
-                <span>Utilize o formulário ao lado para adicionar peças</span>
+                <span>Adicione peças no painel ao lado</span>
             </div>
         `;
         return;
@@ -243,7 +244,7 @@ function calculateOptimalCutting() {
     optimizeBtn.disabled = true;
     optimizeBtn.innerHTML = '<div class="spinner-small"></div> Otimizando...';
 
-    showLoading('Gerando plano de corte otimizado...');
+    showLoading('Processando plano de corte...');
 
     setTimeout(() => {
         const sortedParts = [...state.parts].sort((a, b) => (b.width * b.height) - (a.width * a.height));
@@ -312,7 +313,7 @@ function calculateOptimalCutting() {
         renderResults();
         
         optimizeBtn.disabled = false;
-        optimizeBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Otimizar Corte';
+        optimizeBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Gerar Plano de Corte';
     }, 500);
 }
 
@@ -322,43 +323,58 @@ function renderResults() {
     
     resultDiv.style.display = 'block';
     resultDiv.innerHTML = `
-        <div class="results-header">
-            <h2>📐 Plano de Corte Otimizado</h2>
-            <div class="export-buttons">
-                <button class="export-btn dxf" onclick="exportDXF()">🎨 DXF</button>
-                <button class="export-btn gcode" onclick="exportGCode()">⚙️ G-Code</button>
-                <button class="export-btn pdf" onclick="exportPDF()">📄 PDF</button>
-            </div>
-        </div>
-        
-        <div class="stats-grid">
-            <div class="stat-card"><div class="stat-value">${r.totalSheets}</div><div class="stat-label">Chapas</div></div>
-            <div class="stat-card"><div class="stat-value">${r.totalParts}</div><div class="stat-label">Peças</div></div>
-            <div class="stat-card"><div class="stat-value">${r.efficiency}%</div><div class="stat-label">Aproveitamento</div></div>
-            <div class="stat-card"><div class="stat-value">${(r.totalAreaUsed/1000000).toFixed(2)}m²</div><div class="stat-label">Área Útil</div></div>
-        </div>
-        
-        <div class="sheets-grid">
-            ${r.sheets.map((sheet, idx) => `
-                <div class="sheet-card">
-                    <div class="sheet-header">
-                        <strong>CHAPA ${sheet.id}</strong>
-                        <span class="sheet-badge">${sheet.material} | ${sheet.thickness}mm</span>
-                    </div>
-                    <div class="sheet-info">
-                        Aproveitamento: <strong>${sheet.utilizationRate}%</strong> | Dimensões: ${r.sheetWidth}×${r.sheetHeight}mm
-                    </div>
-                    <div class="sheet-visualization">
-                        <canvas id="sheet-canvas-${idx}" width="350" height="250" class="sheet-canvas"></canvas>
+        <div class="container">
+            <div style="background: var(--bg-elevated); border-radius: 20px; padding: 2rem; margin: 2rem 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                    <h2 style="font-size: 1.5rem;">📐 Resultado da Otimização</h2>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn-primary" onclick="alert('Exportação DXF em breve!')" style="padding: 0.5rem 1rem;">🎨 DXF</button>
+                        <button class="btn-primary" onclick="alert('Exportação G-Code em breve!')" style="background: var(--gradient-gold); padding: 0.5rem 1rem;">⚙️ G-Code</button>
+                        <button class="btn-primary" onclick="alert('Exportação PDF em breve!')" style="background: var(--gradient-success); padding: 0.5rem 1rem;">📄 PDF</button>
                     </div>
                 </div>
-            `).join('')}
+                
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem;">
+                    <div style="background: var(--bg-card); padding: 1rem; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--accent-primary);">${r.totalSheets}</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">Chapas</div>
+                    </div>
+                    <div style="background: var(--bg-card); padding: 1rem; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--accent-primary);">${r.totalParts}</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">Peças</div>
+                    </div>
+                    <div style="background: var(--bg-card); padding: 1rem; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--accent-success);">${r.efficiency}%</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">Aproveitamento</div>
+                    </div>
+                    <div style="background: var(--bg-card); padding: 1rem; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--accent-primary);">${(r.totalAreaUsed/1000000).toFixed(2)}m²</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">Área Útil</div>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem;">
+                    ${r.sheets.map((sheet, idx) => `
+                        <div style="background: var(--bg-card); border-radius: 16px; overflow: hidden; border: 1px solid var(--border);">
+                            <div style="padding: 1rem; background: linear-gradient(135deg, #1a1a2e, #0f0f1a); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;">
+                                <strong>CHAPA ${sheet.id}</strong>
+                                <span style="font-size: 0.75rem; color: var(--accent-primary);">${sheet.material} | ${sheet.utilizationRate}%</span>
+                            </div>
+                            <div style="padding: 1rem; text-align: center;">
+                                <canvas id="sheet-canvas-${idx}" width="350" height="250" style="width: 100%; height: auto; background: #0a0a0f; border-radius: 8px; border: 1px solid var(--border);"></canvas>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
         </div>
     `;
     
     r.sheets.forEach((sheet, idx) => {
         drawTechnicalVisualization(sheet, idx, r.sheetWidth, r.sheetHeight, r.bladeThickness);
     });
+    
+    document.getElementById('optimizer').scrollIntoView({ behavior: 'smooth' });
 }
 
 function drawTechnicalVisualization(sheet, idx, sheetWidth, sheetHeight, bladeThickness) {
@@ -373,11 +389,10 @@ function drawTechnicalVisualization(sheet, idx, sheetWidth, sheetHeight, bladeTh
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
     
-    // Fundo escuro estilo CAD
     ctx.fillStyle = '#0a0a0f';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Grid técnico
+    // Grid
     ctx.strokeStyle = '#1a2a3a';
     ctx.lineWidth = 0.5;
     const gridSpacing = 50 * scale;
@@ -394,27 +409,12 @@ function drawTechnicalVisualization(sheet, idx, sheetWidth, sheetHeight, bladeTh
         ctx.stroke();
     }
     
-    // Contorno da chapa
+    // Chapa
     ctx.strokeStyle = '#00b4d8';
     ctx.lineWidth = 2;
     ctx.strokeRect(offsetX, offsetY, sheetWidth * scale, sheetHeight * scale);
     
-    // Cantos da chapa
-    ctx.fillStyle = '#00b4d8';
-    const cornerSize = 5;
-    ctx.fillRect(offsetX - cornerSize, offsetY - cornerSize, cornerSize, cornerSize);
-    ctx.fillRect(offsetX + sheetWidth * scale, offsetY - cornerSize, cornerSize, cornerSize);
-    ctx.fillRect(offsetX - cornerSize, offsetY + sheetHeight * scale, cornerSize, cornerSize);
-    ctx.fillRect(offsetX + sheetWidth * scale, offsetY + sheetHeight * scale, cornerSize, cornerSize);
-    
-    // Cota da chapa
-    ctx.fillStyle = '#6c6c7e';
-    ctx.font = '10px Inter';
-    ctx.fillText(`${sheetWidth} mm`, offsetX + sheetWidth * scale / 2 - 25, offsetY - 5);
-    ctx.fillText(`${sheetHeight} mm`, offsetX - 35, offsetY + sheetHeight * scale / 2);
-    
-    // Cores para as peças
-    const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#98D8C8', '#F7D794'];
+    const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD'];
     
     sheet.placements.forEach((part, i) => {
         const x = offsetX + part.x * scale;
@@ -422,67 +422,20 @@ function drawTechnicalVisualization(sheet, idx, sheetWidth, sheetHeight, bladeTh
         const w = part.width * scale;
         const h = part.height * scale;
         
-        // Preenchimento da peça com transparência
         ctx.fillStyle = colors[i % colors.length] + '40';
         ctx.fillRect(x, y, w, h);
-        
-        // Contorno da peça
         ctx.strokeStyle = colors[i % colors.length];
         ctx.lineWidth = 1.5;
         ctx.strokeRect(x, y, w, h);
         
-        // Diagonal para efeito técnico
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(x + w, y + h);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(x + w, y);
-        ctx.lineTo(x, y + h);
-        ctx.stroke();
-        
-        // Texto da peça
         ctx.fillStyle = colors[i % colors.length];
         ctx.font = `bold ${Math.min(12, part.height * scale / 5)}px Inter`;
         ctx.fillText(part.name.substring(0, 6), x + 5, y + 15);
-        
-        // Dimensões
         ctx.fillStyle = '#a0a0b0';
         ctx.font = `${Math.min(9, part.height * scale / 6)}px Inter`;
         ctx.fillText(`${part.originalWidth}×${part.originalHeight}`, x + 5, y + 30);
-        
-        // Cota individual
-        ctx.fillStyle = '#6c6c7e';
-        ctx.font = '8px Inter';
-        if (part.width * scale > 40) {
-            ctx.fillText(`${part.originalWidth}mm`, x + w / 2 - 15, y + h + 12);
-        }
-        if (part.height * scale > 30) {
-            ctx.save();
-            ctx.translate(x - 8, y + h / 2);
-            ctx.rotate(-Math.PI / 2);
-            ctx.fillText(`${part.originalHeight}mm`, 0, 0);
-            ctx.restore();
-        }
     });
-    
-    // Legenda
-    ctx.fillStyle = '#1e1e2e';
-    ctx.fillRect(10, canvas.height - 60, 150, 50);
-    ctx.strokeStyle = '#00b4d8';
-    ctx.strokeRect(10, canvas.height - 60, 150, 50);
-    ctx.fillStyle = '#00b4d8';
-    ctx.font = '9px Inter';
-    ctx.fillText(`Ferramenta: Φ${bladeThickness}mm`, 18, canvas.height - 45);
-    ctx.fillStyle = '#20c997';
-    ctx.fillText(`Aproveitamento: ${sheet.utilizationRate}%`, 18, canvas.height - 30);
-    ctx.fillStyle = '#fd7e14';
-    ctx.fillText(`Peças: ${sheet.placements.length}`, 18, canvas.height - 15);
 }
-
-function exportDXF() { alert('Exportação DXF em desenvolvimento...\n\nEm breve disponível!'); }
-function exportGCode() { alert('Exportação G-Code em desenvolvimento...\n\nEm breve disponível!'); }
-function exportPDF() { alert('Exportação PDF em desenvolvimento...\n\nEm breve disponível!'); }
 
 function showLoading(msg) {
     const overlay = document.createElement('div');
@@ -496,8 +449,6 @@ function hideLoading() {
     if (overlay) overlay.remove();
 }
 
+// Tornar funções globais
 window.removePart = removePart;
 window.toggleMaterial = toggleMaterial;
-window.exportDXF = exportDXF;
-window.exportGCode = exportGCode;
-window.exportPDF = exportPDF;
