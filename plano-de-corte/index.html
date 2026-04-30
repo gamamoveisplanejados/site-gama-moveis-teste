@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Otimizador de Corte MDF - Corte Inteligente</title>
+    <!-- CONEXÃO COM O ARQUIVO DE ESTILO -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Bibliotecas para exportação -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+</head>
+<body>
+    <div class="app">
+        <header class="app-header">
+            <h1>📐 Otimizador de Corte MDF</h1>
+            <p>Otimize o corte de suas chapas com eficiência máxima</p>
+        </header>
+
+        <main>
+            <div class="cutting-optimizer">
+                <div class="material-form">
+                    <h2>📋 Parâmetros de Corte</h2>
+                    <div class="form-section">
+                        <h3>⚙️ Configurações Gerais</h3>
+                        <div class="form-group">
+                            <label>Espessura da Serra (mm):</label>
+                            <input type="number" id="bladeThickness" step="0.5" min="0" value="3" class="form-input">
+                            <small>Considera o desperdício causado pelo corte da serra</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Espessura da Chapa (mm):</label>
+                            <select id="sheetThickness" class="form-input">
+                                <option value="6">6 mm</option>
+                                <option value="15">15 mm</option>
+                                <option value="18" selected>18 mm</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Número de Chapas Disponíveis:</label>
+                            <input type="number" id="sheetsCount" min="1" max="100" value="5" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <h3>🎨 Materiais Disponíveis</h3>
+                        <div id="materialsGrid" class="materials-grid"></div>
+                    </div>
+                    <div class="form-section">
+                        <h3>📏 Peças para Cortar</h3>
+                        <div class="add-part-form">
+                            <input type="text" id="partName" placeholder="Nome da peça" class="form-input">
+                            <input type="number" id="partWidth" placeholder="Largura (mm)" class="form-input" min="1">
+                            <input type="number" id="partHeight" placeholder="Altura (mm)" class="form-input" min="1">
+                            <input type="number" id="partQuantity" placeholder="Quantidade" class="form-input" value="1">
+                            <button id="addPartBtn" class="add-part-button">+ Adicionar Peça</button>
+                        </div>
+                        <div class="parts-list">
+                            <h4>Lista de Peças (<span id="partsCount">0</span>)</h4>
+                            <div id="partsTable" class="parts-table"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button id="optimizeBtn" class="optimize-button">⚡ Otimizar Corte</button>
+                </div>
+                <div id="resultDisplay" class="result-display" style="display: none;"></div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <p>© 2024 Otimizador de Corte - Maximize o aproveitamento das suas chapas</p>
+        </footer>
+    </div>
+
+    <!-- CONEXÃO COM O ARQUIVO DE LÓGICA -->
+    <script src="script.js"></script>
+</body>
+</html>
