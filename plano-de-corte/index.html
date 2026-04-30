@@ -2,214 +2,100 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Nesting Pro | Otimizador de Corte CNC</title>
-    
-    <!-- CONEXÃO COM O SEU NOVO ARQUIVO CSS PROFISSIONAL -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gama Pro | Otimizador de Corte</title>
     <link rel="stylesheet" href="style.css">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-    <div class="app">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo">
-                    <div class="logo-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <rect x="3" y="3" width="18" height="18" rx="2"/>
-                            <path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>
-                        </svg>
-                    </div>
-                    <div class="logo-text">
-                        <span class="logo-title">NESTING PRO</span>
-                        <span class="logo-sub">CNC Optimizer</span>
-                    </div>
-                </div>
+
+    <!-- Header & Nav -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">GAMA<span>PRO</span></div>
+            <div class="nav-links">
+                <a href="#ferramenta">Ferramenta</a>
+                <a href="https://gamamoveisplanejados.com.br">Voltar ao Site</a>
             </div>
-            
-            <nav class="sidebar-nav">
-                <a href="#" class="nav-item active">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    <span>Dashboard</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>
-                    <span>Corte</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4v16h16V4H4zm2 4h12M6 12h12M18 8v8"/></svg>
-                    <span>Relatórios</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H5.78a1.65 1.65 0 0 0-1.51 1 1.65 1.65 0 0 0 .33 1.82l.03.03A10 10 0 0 0 12 17.66a10 10 0 0 0 6.37-2.63l.03-.03z"/></svg>
-                    <span>Config</span>
-                </a>
-            </nav>
-            
-            <div class="sidebar-footer">
-                <div class="machine-status">
-                    <div class="status-led online"></div>
-                    <div class="status-info">
-                        <span class="status-label">CNR-8800</span>
-                        <span class="status-value">Online</span>
-                    </div>
-                </div>
-            </div>
-        </aside>
+        </div>
+    </nav>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Top Bar -->
-            <header class="top-bar">
-                <div class="page-title">
-                    <h1>Plano de Corte</h1>
-                    <p>Otimização avançada para CNC Router</p>
-                </div>
-                <div class="action-buttons">
-                    <button id="optimizeBtn" class="btn-primary">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                        Otimizar Corte
-                    </button>
-                    <button id="newCalcBtn" class="btn-secondary">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg>
-                        Novo
-                    </button>
-                </div>
-            </header>
+    <!-- Banner Principal -->
+    <section class="hero-banner">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Otimização de Precisão</h1>
+            <p>Tecnologia avançada em nesting para marcenarias de alto desempenho.</p>
+        </div>
+    </section>
 
-            <!-- Dashboard Grid -->
-            <div class="dashboard-grid">
-                <!-- Parameters Panel -->
-                <div class="panel panel-dark">
-                    <div class="panel-header">
-                        <div class="panel-title">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H5.78a1.65 1.65 0 0 0-1.51 1 1.65 1.65 0 0 0 .33 1.82l.03.03A10 10 0 0 0 12 17.66a10 10 0 0 0 6.37-2.63l.03-.03z"/></svg>
-                            <h3>Parâmetros de Usinagem</h3>
+    <main class="container" id="ferramenta">
+        <div class="main-grid">
+            <!-- Painel de Configurações -->
+            <aside class="config-panel">
+                <div class="card">
+                    <h3><span class="icon">⚙️</span> Configurações</h3>
+                    
+                    <div class="input-group">
+                        <label>Material & Espessura</label>
+                        <div class="thickness-tabs">
+                            <button class="tab-opt" data-thickness="6">6mm</button>
+                            <button class="tab-opt" data-thickness="15">15mm</button>
+                            <button class="tab-opt active" data-thickness="18">18mm</button>
                         </div>
                     </div>
-                    <div class="panel-body">
-                        <div class="param-group">
-                            <label>Material</label>
-                            <div class="material-row">
-                                <span class="material-badge MDF">MDF</span>
-                                <div class="thickness-selector">
-                                    <button class="thickness-option" data-thickness="6">6mm</button>
-                                    <button class="thickness-option" data-thickness="15">15mm</button>
-                                    <button class="thickness-option active" data-thickness="18">18mm</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="param-group">
-                            <label>Ferramenta</label>
-                            <div class="tool-info">
-                                <div class="tool-bit">
-                                    <span>Router Bit</span>
-                                    <strong>Φ<span id="bladeValue">3.0</span> mm</strong>
-                                </div>
-                                <input type="range" id="bladeThickness" min="0" max="10" step="0.5" value="3" class="tool-slider">
-                            </div>
-                        </div>
-                        
-                        <div class="param-group">
-                            <label>Dimensões da Chapa</label>
-                            <div class="dimension-inputs">
-                                <div class="dim-input">
-                                    <span class="dim-label">L</span>
-                                    <input type="number" id="sheetWidth" value="2750" step="10">
-                                    <span class="dim-unit">mm</span>
-                                </div>
-                                <div class="dim-input">
-                                    <span class="dim-label">A</span>
-                                    <input type="number" id="sheetHeight" value="1850" step="10">
-                                    <span class="dim-unit">mm</span>
-                                </div>
-                            </div>
+
+                    <div class="input-group">
+                        <label>Fresa / Serra (mm): <span id="bladeValue">3.0</span></label>
+                        <input type="range" id="bladeThickness" min="0" max="10" step="0.5" value="3">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Dimensões da Chapa (mm)</label>
+                        <div class="flex-inputs">
+                            <input type="number" id="sheetWidth" value="2750">
+                            <span>×</span>
+                            <input type="number" id="sheetHeight" value="1850">
                         </div>
                     </div>
                 </div>
 
-                <!-- Materials Panel -->
-                <div class="panel panel-dark">
-                    <div class="panel-header">
-                        <div class="panel-title">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-                            <h3>Materiais Disponíveis</h3>
+                <div class="card">
+                    <h3><span class="icon">➕</span> Nova Peça</h3>
+                    <div class="part-form">
+                        <input type="text" id="partName" placeholder="Identificação da peça">
+                        <div class="flex-inputs">
+                            <input type="number" id="partWidth" placeholder="Base">
+                            <input type="number" id="partHeight" placeholder="Altura">
+                            <input type="number" id="partQuantity" value="1">
+                        </div>
+                        <button id="addPartBtn" class="btn-add">Adicionar à Lista</button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Painel de Lista e Resultados -->
+            <section class="content-panel">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Lista de Peças</h3>
+                        <div class="actions">
+                            <button id="optimizeBtn" class="btn-primary">Gerar Plano de Corte</button>
+                            <button id="newCalcBtn" class="btn-outline">Limpar</button>
                         </div>
                     </div>
-                    <div class="panel-body">
-                        <div id="materialsGrid" class="materials-grid"></div>
+                    <div id="partsTable" class="table-container">
+                        <p class="empty-msg">Nenhuma peça adicionada ainda.</p>
                     </div>
                 </div>
 
-                <!-- Add Part Panel -->
-                <div class="panel panel-dark">
-                    <div class="panel-header">
-                        <div class="panel-title">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg>
-                            <h3>Adicionar Peça</h3>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="add-part-form">
-                            <div class="form-field">
-                                <label>Etiqueta</label>
-                                <input type="text" id="partName" placeholder="Ex: Frente Armário" class="form-control">
-                            </div>
-                            <div class="form-row-3">
-                                <div class="form-field">
-                                    <label>Base</label>
-                                    <input type="number" id="partWidth" placeholder="0" class="form-control">
-                                    <span class="field-unit">mm</span>
-                                </div>
-                                <div class="form-field">
-                                    <label>Altura</label>
-                                    <input type="number" id="partHeight" placeholder="0" class="form-control">
-                                    <span class="field-unit">mm</span>
-                                </div>
-                                <div class="form-field">
-                                    <label>Qtd</label>
-                                    <input type="number" id="partQuantity" value="1" class="form-control">
-                                </div>
-                            </div>
-                            <button id="addPartBtn" class="btn-add">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg>
-                                Adicionar à Lista
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <!-- Onde o plano aparece -->
+                <div id="resultDisplay" class="result-area"></div>
+            </section>
+        </div>
+    </main>
 
-                <!-- Parts List Panel -->
-                <div class="panel panel-dark panel-large">
-                    <div class="panel-header">
-                        <div class="panel-title">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                            <h3>Lista de Peças</h3>
-                        </div>
-                        <span id="partsCount" class="badge">0</span>
-                    </div>
-                    <div class="panel-body">
-                        <div id="partsTable" class="parts-table-container">
-                            <div class="empty-state">
-                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
-                                <p>Nenhuma peça adicionada</p>
-                                <span>Utilize o formulário ao lado para adicionar peças</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Results Area -->
-            <div id="resultDisplay" class="results-panel" style="display: none;"></div>
-        </main>
-    </div>
-
-    <!-- CONEXÃO COM O SEU NOVO ARQUIVO JS -->
     <script src="script.js"></script>
 </body>
 </html>
