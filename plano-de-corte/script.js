@@ -1,33 +1,28 @@
-// Estado da aplicação
 let state = {
     parts: [],
     selectedMaterials: ['BRANCO', 'PRETO'],
     cuttingResult: null,
-    editingPartId: null,
     sheetWidth: 2750,
     sheetHeight: 1850
 };
 
-// Materiais disponíveis
 const availableMaterials = [
-    { id: 1, name: 'MDF Branco', color: '#FFFFFF', code: 'BRANCO', textColor: '#333' },
-    { id: 2, name: 'MDF Preto', color: '#1a1a1a', code: 'PRETO', textColor: '#fff' },
-    { id: 3, name: 'MDF Carvalho', color: '#8B6914', code: 'CARVALHO', textColor: '#fff' },
-    { id: 4, name: 'MDF Nogueira', color: '#5C4033', code: 'NOGUEIRA', textColor: '#fff' },
-    { id: 5, name: 'MDF Cerejeira', color: '#DEB887', code: 'CEREJEIRA', textColor: '#333' },
-    { id: 6, name: 'MDF Freijó', color: '#C4A35A', code: 'FREIJO', textColor: '#333' },
-    { id: 7, name: 'MDF Branco Neve', color: '#F0F0F0', code: 'BRANCO_NEVE', textColor: '#333' },
-    { id: 8, name: 'MDF Cinza', color: '#808080', code: 'CINZA', textColor: '#fff' },
-    { id: 9, name: 'MDF Azul', color: '#4169E1', code: 'AZUL', textColor: '#fff' },
-    { id: 10, name: 'MDF Vermelho', color: '#DC143C', code: 'VERMELHO', textColor: '#fff' }
+    { id: 1, name: 'Branco', color: '#FFFFFF', code: 'BRANCO', textColor: '#333' },
+    { id: 2, name: 'Preto', color: '#1a1a1a', code: 'PRETO', textColor: '#fff' },
+    { id: 3, name: 'Carvalho', color: '#8B6914', code: 'CARVALHO', textColor: '#fff' },
+    { id: 4, name: 'Nogueira', color: '#5C4033', code: 'NOGUEIRA', textColor: '#fff' },
+    { id: 5, name: 'Cerejeira', color: '#DEB887', code: 'CEREJEIRA', textColor: '#333' },
+    { id: 6, name: 'Freijó', color: '#C4A35A', code: 'FREIJO', textColor: '#333' },
+    { id: 7, name: 'Branco Neve', color: '#F0F0F0', code: 'BRANCO_NEVE', textColor: '#333' },
+    { id: 8, name: 'Cinza', color: '#808080', code: 'CINZA', textColor: '#fff' },
+    { id: 9, name: 'Azul', color: '#4169E1', code: 'AZUL', textColor: '#fff' },
+    { id: 10, name: 'Vermelho', color: '#DC143C', code: 'VERMELHO', textColor: '#fff' }
 ];
 
-// Inicialização
 document.addEventListener('DOMContentLoaded', () => {
     initEventListeners();
     renderMaterialsGrid();
     renderPartsTable();
-    updateSheetDimensions();
 });
 
 function initEventListeners() {
@@ -35,29 +30,24 @@ function initEventListeners() {
     document.getElementById('optimizeBtn').addEventListener('click', calculateOptimalCutting);
     document.getElementById('newCalcBtn').addEventListener('click', resetCalculation);
     
-    // Espessura da chapa
-    document.querySelectorAll('.chip[data-thickness]').forEach(chip => {
-        chip.addEventListener('click', () => {
-            document.querySelectorAll('.chip[data-thickness]').forEach(c => c.classList.remove('active'));
-            chip.classList.add('active');
-            updateSheetDimensions();
+    document.querySelectorAll('.thickness-option').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.thickness-option').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
         });
     });
     
-    // Espessura da serra slider
     const bladeSlider = document.getElementById('bladeThickness');
     bladeSlider.addEventListener('input', (e) => {
-        document.getElementById('bladeValue').textContent = e.target.value + ' mm';
+        document.getElementById('bladeValue').textContent = e.target.value;
     });
     
-    // Dimensões da chapa
-    document.getElementById('sheetWidth').addEventListener('change', updateSheetDimensions);
-    document.getElementById('sheetHeight').addEventListener('change', updateSheetDimensions);
-}
-
-function updateSheetDimensions() {
-    state.sheetWidth = parseInt(document.getElementById('sheetWidth').value) || 2750;
-    state.sheetHeight = parseInt(document.getElementById('sheetHeight').value) || 1850;
+    document.getElementById('sheetWidth').addEventListener('change', (e) => {
+        state.sheetWidth = parseInt(e.target.value) || 2750;
+    });
+    document.getElementById('sheetHeight').addEventListener('change', (e) => {
+        state.sheetHeight = parseInt(e.target.value) || 1850;
+    });
 }
 
 function resetCalculation() {
@@ -71,7 +61,7 @@ function renderMaterialsGrid() {
     const grid = document.getElementById('materialsGrid');
     grid.innerHTML = availableMaterials.map(material => `
         <div class="material-card ${state.selectedMaterials.includes(material.code) ? 'selected' : ''}"
-             style="background: ${material.color}; color: ${material.textColor}"
+             style="background: ${state.selectedMaterials.includes(material.code) ? `linear-gradient(135deg, ${material.color}20, ${material.color}10)` : 'var(--bg-tertiary)'}; color: ${material.textColor}"
              onclick="toggleMaterial('${material.code}')">
             <span>${material.name}</span>
             ${state.selectedMaterials.includes(material.code) ? '<span>✓</span>' : ''}
@@ -129,9 +119,9 @@ function renderPartsTable() {
     if (state.parts.length === 0) {
         container.innerHTML = `
             <div class="empty-state">
-                <div class="empty-icon">📭</div>
-                <p>Sua lista está vazia</p>
-                <span>Adicione peças abaixo para começar</span>
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+                <p>Nenhuma peça adicionada</p>
+                <span>Utilize o formulário ao lado para adicionar peças</span>
             </div>
         `;
         return;
@@ -146,9 +136,9 @@ function renderPartsTable() {
                 ${state.parts.map(part => `
                     <tr>
                         <td><strong>${escapeHtml(part.name)}</strong></td>
-                        <td>${part.width}mm</td>
-                        <td>${part.height}mm</td>
-                        <td>${(part.width * part.height / 10000).toFixed(2)}m²</td>
+                        <td>${part.width} mm</td>
+                        <td>${part.height} mm</td>
+                        <td>${(part.width * part.height / 10000).toFixed(2)} m²</td>
                         <td class="part-actions">
                             <button onclick="removePart(${part.id})" title="Remover">🗑️</button>
                         </td>
@@ -165,7 +155,6 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-// Algoritmo de Nesting (mesmo da versão anterior)
 class NestingOptimizer {
     constructor(sheetWidth, sheetHeight, bladeThickness) {
         this.sheetWidth = sheetWidth;
@@ -189,8 +178,8 @@ class NestingOptimizer {
             const w = orientation.width;
             const h = orientation.height;
             
-            for (let y = 0; y <= this.sheetHeight - h; y += 5) {
-                for (let x = 0; x <= this.sheetWidth - w; x += 5) {
+            for (let y = 0; y <= this.sheetHeight - h; y += 10) {
+                for (let x = 0; x <= this.sheetWidth - w; x += 10) {
                     if (this.isValidPosition(x, y, w, h)) {
                         if (y < bestY) {
                             bestY = y;
@@ -242,8 +231,8 @@ class NestingOptimizer {
 
 function calculateOptimalCutting() {
     const bladeThickness = parseFloat(document.getElementById('bladeThickness').value);
-    const sheetThickness = parseInt(document.querySelector('.chip.active').dataset.thickness);
-    const sheetsCount = 10; // Máximo de chapas
+    const sheetThickness = parseInt(document.querySelector('.thickness-option.active').dataset.thickness);
+    const maxSheets = 10;
 
     if (state.parts.length === 0) {
         alert('Adicione pelo menos uma peça!');
@@ -251,8 +240,8 @@ function calculateOptimalCutting() {
     }
 
     const optimizeBtn = document.getElementById('optimizeBtn');
-    optimizeBtn.textContent = '⏳ Otimizando...';
     optimizeBtn.disabled = true;
+    optimizeBtn.innerHTML = '<div class="spinner-small"></div> Otimizando...';
 
     showLoading('Gerando plano de corte otimizado...');
 
@@ -280,13 +269,14 @@ function calculateOptimalCutting() {
                     usedSheets.push({
                         id: usedSheets.length + 1,
                         optimizer: newOptimizer,
-                        material: state.selectedMaterials[usedSheets.length % state.selectedMaterials.length]
+                        material: state.selectedMaterials[usedSheets.length % state.selectedMaterials.length],
+                        thickness: sheetThickness
                     });
                 }
             }
         }
 
-        const finalSheets = usedSheets.slice(0, sheetsCount);
+        const finalSheets = usedSheets.slice(0, maxSheets);
         let totalAreaUsed = 0;
         let totalAreaAvailable = 0;
         
@@ -303,6 +293,7 @@ function calculateOptimalCutting() {
             sheets: finalSheets.map(sheet => ({
                 id: sheet.id,
                 material: sheet.material,
+                thickness: sheet.thickness,
                 placements: sheet.optimizer.placements,
                 utilizationRate: sheet.optimizer.getUtilizationRate().toFixed(1)
             })),
@@ -320,8 +311,8 @@ function calculateOptimalCutting() {
         hideLoading();
         renderResults();
         
-        optimizeBtn.textContent = '⚡ Gerar Plano de Corte';
         optimizeBtn.disabled = false;
+        optimizeBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Otimizar Corte';
     }, 500);
 }
 
@@ -331,84 +322,167 @@ function renderResults() {
     
     resultDiv.style.display = 'block';
     resultDiv.innerHTML = `
-        <div class="result-header">
+        <div class="results-header">
             <h2>📐 Plano de Corte Otimizado</h2>
             <div class="export-buttons">
-                <button class="export-btn dxf" onclick="exportDXF()">🎨 Exportar DXF</button>
-                <button class="export-btn gcode" onclick="exportGCode()">⚙️ Exportar G-Code</button>
-                <button class="export-btn pdf" onclick="exportPDF()">📄 Exportar PDF</button>
+                <button class="export-btn dxf" onclick="exportDXF()">🎨 DXF</button>
+                <button class="export-btn gcode" onclick="exportGCode()">⚙️ G-Code</button>
+                <button class="export-btn pdf" onclick="exportPDF()">📄 PDF</button>
             </div>
         </div>
         
         <div class="stats-grid">
-            <div class="stat-card"><div class="stat-value">${r.totalSheets}</div><div class="stat-label">Chapas Necessárias</div></div>
-            <div class="stat-card"><div class="stat-value">${r.totalParts}</div><div class="stat-label">Total de Peças</div></div>
+            <div class="stat-card"><div class="stat-value">${r.totalSheets}</div><div class="stat-label">Chapas</div></div>
+            <div class="stat-card"><div class="stat-value">${r.totalParts}</div><div class="stat-label">Peças</div></div>
             <div class="stat-card"><div class="stat-value">${r.efficiency}%</div><div class="stat-label">Aproveitamento</div></div>
-            <div class="stat-card"><div class="stat-value">${(r.totalAreaUsed/1000000).toFixed(2)}m²</div><div class="stat-label">Área Utilizada</div></div>
+            <div class="stat-card"><div class="stat-value">${(r.totalAreaUsed/1000000).toFixed(2)}m²</div><div class="stat-label">Área Útil</div></div>
         </div>
         
         <div class="sheets-grid">
             ${r.sheets.map((sheet, idx) => `
                 <div class="sheet-card">
                     <div class="sheet-header">
-                        <strong>Chapa #${sheet.id}</strong> - ${sheet.material}
-                        <span style="float:right">${sheet.utilizationRate}% aproveitamento</span>
+                        <strong>CHAPA ${sheet.id}</strong>
+                        <span class="sheet-badge">${sheet.material} | ${sheet.thickness}mm</span>
                     </div>
                     <div class="sheet-info">
-                        <strong>Peças:</strong> ${sheet.placements.length}<br>
-                        <strong>Dimensões:</strong> ${r.sheetWidth}×${r.sheetHeight}mm
+                        Aproveitamento: <strong>${sheet.utilizationRate}%</strong> | Dimensões: ${r.sheetWidth}×${r.sheetHeight}mm
                     </div>
                     <div class="sheet-visualization">
-                        <canvas id="sheet-canvas-${idx}" width="300" height="200" style="border:1px solid #ddd; border-radius:8px"></canvas>
+                        <canvas id="sheet-canvas-${idx}" width="350" height="250" class="sheet-canvas"></canvas>
                     </div>
                 </div>
             `).join('')}
         </div>
     `;
     
-    // Desenhar visualizações
     r.sheets.forEach((sheet, idx) => {
-        drawSheetVisualization(sheet, idx, r.sheetWidth, r.sheetHeight);
+        drawTechnicalVisualization(sheet, idx, r.sheetWidth, r.sheetHeight, r.bladeThickness);
     });
 }
 
-function drawSheetVisualization(sheet, idx, sheetWidth, sheetHeight) {
+function drawTechnicalVisualization(sheet, idx, sheetWidth, sheetHeight, bladeThickness) {
     const canvas = document.getElementById(`sheet-canvas-${idx}`);
     if (!canvas) return;
     
     const ctx = canvas.getContext('2d');
-    const scale = Math.min(canvas.width / sheetWidth, canvas.height / sheetHeight) * 0.9;
+    const scale = Math.min(canvas.width / sheetWidth, canvas.height / sheetHeight) * 0.85;
     const offsetX = (canvas.width - sheetWidth * scale) / 2;
     const offsetY = (canvas.height - sheetHeight * scale) / 2;
     
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
     
-    ctx.fillStyle = '#f8f9fa';
+    // Fundo escuro estilo CAD
+    ctx.fillStyle = '#0a0a0f';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = '#adb5bd';
+    
+    // Grid técnico
+    ctx.strokeStyle = '#1a2a3a';
+    ctx.lineWidth = 0.5;
+    const gridSpacing = 50 * scale;
+    for (let x = 0; x < canvas.width; x += gridSpacing) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+    }
+    for (let y = 0; y < canvas.height; y += gridSpacing) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+    }
+    
+    // Contorno da chapa
+    ctx.strokeStyle = '#00b4d8';
+    ctx.lineWidth = 2;
     ctx.strokeRect(offsetX, offsetY, sheetWidth * scale, sheetHeight * scale);
     
-    const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7'];
+    // Cantos da chapa
+    ctx.fillStyle = '#00b4d8';
+    const cornerSize = 5;
+    ctx.fillRect(offsetX - cornerSize, offsetY - cornerSize, cornerSize, cornerSize);
+    ctx.fillRect(offsetX + sheetWidth * scale, offsetY - cornerSize, cornerSize, cornerSize);
+    ctx.fillRect(offsetX - cornerSize, offsetY + sheetHeight * scale, cornerSize, cornerSize);
+    ctx.fillRect(offsetX + sheetWidth * scale, offsetY + sheetHeight * scale, cornerSize, cornerSize);
+    
+    // Cota da chapa
+    ctx.fillStyle = '#6c6c7e';
+    ctx.font = '10px Inter';
+    ctx.fillText(`${sheetWidth} mm`, offsetX + sheetWidth * scale / 2 - 25, offsetY - 5);
+    ctx.fillText(`${sheetHeight} mm`, offsetX - 35, offsetY + sheetHeight * scale / 2);
+    
+    // Cores para as peças
+    const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#98D8C8', '#F7D794'];
     
     sheet.placements.forEach((part, i) => {
-        ctx.fillStyle = colors[i % colors.length];
-        ctx.fillRect(offsetX + part.x * scale, offsetY + part.y * scale, part.width * scale, part.height * scale);
-        ctx.strokeStyle = '#333';
-        ctx.strokeRect(offsetX + part.x * scale, offsetY + part.y * scale, part.width * scale, part.height * scale);
+        const x = offsetX + part.x * scale;
+        const y = offsetY + part.y * scale;
+        const w = part.width * scale;
+        const h = part.height * scale;
         
-        ctx.fillStyle = '#000';
-        ctx.font = '10px Inter';
-        ctx.fillText(part.name.substring(0, 8), offsetX + part.x * scale + 5, offsetY + part.y * scale + 15);
+        // Preenchimento da peça com transparência
+        ctx.fillStyle = colors[i % colors.length] + '40';
+        ctx.fillRect(x, y, w, h);
+        
+        // Contorno da peça
+        ctx.strokeStyle = colors[i % colors.length];
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(x, y, w, h);
+        
+        // Diagonal para efeito técnico
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + w, y + h);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x + w, y);
+        ctx.lineTo(x, y + h);
+        ctx.stroke();
+        
+        // Texto da peça
+        ctx.fillStyle = colors[i % colors.length];
+        ctx.font = `bold ${Math.min(12, part.height * scale / 5)}px Inter`;
+        ctx.fillText(part.name.substring(0, 6), x + 5, y + 15);
+        
+        // Dimensões
+        ctx.fillStyle = '#a0a0b0';
+        ctx.font = `${Math.min(9, part.height * scale / 6)}px Inter`;
+        ctx.fillText(`${part.originalWidth}×${part.originalHeight}`, x + 5, y + 30);
+        
+        // Cota individual
+        ctx.fillStyle = '#6c6c7e';
+        ctx.font = '8px Inter';
+        if (part.width * scale > 40) {
+            ctx.fillText(`${part.originalWidth}mm`, x + w / 2 - 15, y + h + 12);
+        }
+        if (part.height * scale > 30) {
+            ctx.save();
+            ctx.translate(x - 8, y + h / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.fillText(`${part.originalHeight}mm`, 0, 0);
+            ctx.restore();
+        }
     });
+    
+    // Legenda
+    ctx.fillStyle = '#1e1e2e';
+    ctx.fillRect(10, canvas.height - 60, 150, 50);
+    ctx.strokeStyle = '#00b4d8';
+    ctx.strokeRect(10, canvas.height - 60, 150, 50);
+    ctx.fillStyle = '#00b4d8';
+    ctx.font = '9px Inter';
+    ctx.fillText(`Ferramenta: Φ${bladeThickness}mm`, 18, canvas.height - 45);
+    ctx.fillStyle = '#20c997';
+    ctx.fillText(`Aproveitamento: ${sheet.utilizationRate}%`, 18, canvas.height - 30);
+    ctx.fillStyle = '#fd7e14';
+    ctx.fillText(`Peças: ${sheet.placements.length}`, 18, canvas.height - 15);
 }
 
-// Funções de exportação
-function exportDXF() { alert('Exportação DXF em desenvolvimento...'); }
-function exportGCode() { alert('Exportação G-Code em desenvolvimento...'); }
-function exportPDF() { 
-    alert('Exportação PDF em desenvolvimento...\n\nEm breve esta funcionalidade estará disponível!');
-}
+function exportDXF() { alert('Exportação DXF em desenvolvimento...\n\nEm breve disponível!'); }
+function exportGCode() { alert('Exportação G-Code em desenvolvimento...\n\nEm breve disponível!'); }
+function exportPDF() { alert('Exportação PDF em desenvolvimento...\n\nEm breve disponível!'); }
 
 function showLoading(msg) {
     const overlay = document.createElement('div');
@@ -422,7 +496,6 @@ function hideLoading() {
     if (overlay) overlay.remove();
 }
 
-// Tornar funções globais
 window.removePart = removePart;
 window.toggleMaterial = toggleMaterial;
 window.exportDXF = exportDXF;
