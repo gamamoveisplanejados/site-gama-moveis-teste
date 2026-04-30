@@ -4,96 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gama Pro | Otimizador de Corte</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <style>
+        /* ESTILO INTERNO PARA NÃO FALHAR */
+        :root {
+            --primary: #0052FF;
+            --dark: #0F172A;
+            --bg: #F8FAFC;
+            --card: #FFFFFF;
+            --text: #334155;
+            --border: #E2E8F0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); }
+
+        /* NAVBAR */
+        .navbar { background: white; padding: 1rem 5%; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--dark); }
+        .logo span { color: var(--primary); }
+        .nav-links a { text-decoration: none; color: var(--text); font-weight: 600; margin-left: 20px; font-size: 0.9rem; }
+
+        /* HERO BANNER */
+        .hero {
+            height: 350px;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
+                        url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1470&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: white; text-align: center; padding: 0 20px;
+        }
+        .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 10px; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; }
+
+        /* CONTAINER PRINCIPAL */
+        .container { max-width: 1200px; margin: -60px auto 50px; padding: 0 20px; display: grid; grid-template-columns: 350px 1fr; gap: 30px; }
+
+        /* CARDS */
+        .card { background: white; border-radius: 16px; padding: 25px; border: 1px solid var(--border); box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .card h3 { font-size: 1.1rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; color: var(--dark); }
+
+        /* INPUTS E BOTÕES */
+        .input-group { margin-bottom: 20px; }
+        label { font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 8px; color: #64748b; }
+        input[type="number"], input[type="text"] { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: #f1f5f9; font-size: 1rem; }
+        
+        .btn-add { width: 100%; padding: 14px; background: var(--dark); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .btn-add:hover { background: #000; }
+        
+        .btn-primary { padding: 14px 28px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; }
+        
+        /* RESULTADOS */
+        .flex-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .sheet-canvas { width: 100%; background: white; border: 2px solid var(--dark); border-radius: 8px; margin-top: 20px; }
+        
+        .thickness-tabs { display: flex; gap: 10px; }
+        .tab-opt { padding: 8px 15px; border: 1px solid var(--border); border-radius: 6px; background: white; cursor: pointer; font-weight: 600; }
+        .tab-opt.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+        @media (max-width: 900px) { .container { grid-template-columns: 1fr; margin-top: 20px; } .hero h1 { font-size: 2rem; } }
+    </style>
 </head>
 <body>
 
-    <!-- Header & Nav -->
     <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">GAMA<span>PRO</span></div>
-            <div class="nav-links">
-                <a href="#ferramenta">Ferramenta</a>
-                <a href="https://gamamoveisplanejados.com.br">Voltar ao Site</a>
-            </div>
+        <div class="logo">GAMA<span>PRO</span></div>
+        <div class="nav-links">
+            <a href="https://gamamoveisplanejados.com.br">Voltar ao Site</a>
         </div>
     </nav>
 
-    <!-- Banner Principal -->
-    <section class="hero-banner">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1>Otimização de Precisão</h1>
-            <p>Tecnologia avançada em nesting para marcenarias de alto desempenho.</p>
-        </div>
-    </section>
+    <header class="hero">
+        <h1>Otimização Gama Pro</h1>
+        <p>Tecnologia de nesting industrial para marcenarias modernas.</p>
+    </header>
 
-    <main class="container" id="ferramenta">
-        <div class="main-grid">
-            <!-- Painel de Configurações -->
-            <aside class="config-panel">
-                <div class="card">
-                    <h3><span class="icon">⚙️</span> Configurações</h3>
-                    
-                    <div class="input-group">
-                        <label>Material & Espessura</label>
-                        <div class="thickness-tabs">
-                            <button class="tab-opt" data-thickness="6">6mm</button>
-                            <button class="tab-opt" data-thickness="15">15mm</button>
-                            <button class="tab-opt active" data-thickness="18">18mm</button>
-                        </div>
-                    </div>
-
-                    <div class="input-group">
-                        <label>Fresa / Serra (mm): <span id="bladeValue">3.0</span></label>
-                        <input type="range" id="bladeThickness" min="0" max="10" step="0.5" value="3">
-                    </div>
-
-                    <div class="input-group">
-                        <label>Dimensões da Chapa (mm)</label>
-                        <div class="flex-inputs">
-                            <input type="number" id="sheetWidth" value="2750">
-                            <span>×</span>
-                            <input type="number" id="sheetHeight" value="1850">
-                        </div>
+    <main class="container">
+        <!-- Coluna de Configuração -->
+        <aside>
+            <div class="card">
+                <h3>⚙️ Configurações</h3>
+                <div class="input-group">
+                    <label>Espessura do MDF</label>
+                    <div class="thickness-tabs">
+                        <button class="tab-opt" onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">6mm</button>
+                        <button class="tab-opt" onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">15mm</button>
+                        <button class="tab-opt active" onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">18mm</button>
                     </div>
                 </div>
-
-                <div class="card">
-                    <h3><span class="icon">➕</span> Nova Peça</h3>
-                    <div class="part-form">
-                        <input type="text" id="partName" placeholder="Identificação da peça">
-                        <div class="flex-inputs">
-                            <input type="number" id="partWidth" placeholder="Base">
-                            <input type="number" id="partHeight" placeholder="Altura">
-                            <input type="number" id="partQuantity" value="1">
-                        </div>
-                        <button id="addPartBtn" class="btn-add">Adicionar à Lista</button>
+                <div class="input-group">
+                    <label>Fresa / Serra (mm)</label>
+                    <input type="number" id="bladeThickness" value="3" step="0.5">
+                </div>
+                <div class="input-group">
+                    <label>Chapa Largura x Altura (mm)</label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="number" id="sheetWidth" value="2750">
+                        <span>×</span>
+                        <input type="number" id="sheetHeight" value="1850">
                     </div>
                 </div>
-            </aside>
+            </div>
 
-            <!-- Painel de Lista e Resultados -->
-            <section class="content-panel">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Lista de Peças</h3>
-                        <div class="actions">
-                            <button id="optimizeBtn" class="btn-primary">Gerar Plano de Corte</button>
-                            <button id="newCalcBtn" class="btn-outline">Limpar</button>
-                        </div>
-                    </div>
-                    <div id="partsTable" class="table-container">
-                        <p class="empty-msg">Nenhuma peça adicionada ainda.</p>
+            <div class="card">
+                <h3>➕ Nova Peça</h3>
+                <div class="input-group">
+                    <input type="text" id="partName" placeholder="Nome da peça (Ex: Lateral)">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+                    <div class="input-group"><label>Base</label><input type="number" id="partWidth"></div>
+                    <div class="input-group"><label>Altura</label><input type="number" id="partHeight"></div>
+                    <div class="input-group"><label>Qtd</label><input type="number" id="partQuantity" value="1"></div>
+                </div>
+                <button id="addPartBtn" class="btn-add">Adicionar à Lista</button>
+            </div>
+        </aside>
+
+        <!-- Coluna de Lista -->
+        <section>
+            <div class="card">
+                <div class="flex-header">
+                    <h3>Lista de Produção</h3>
+                    <div style="display: flex; gap: 10px;">
+                        <button id="optimizeBtn" class="btn-primary">⚡ Otimizar Corte</button>
+                        <button id="newCalcBtn" style="padding: 10px; border: none; background: none; cursor: pointer;">Limpar</button>
                     </div>
                 </div>
+                <div id="partsTable">
+                    <p style="text-align: center; color: #94a3b8; padding: 20px;">Adicione peças para começar o cálculo.</p>
+                </div>
+            </div>
 
-                <!-- Onde o plano aparece -->
-                <div id="resultDisplay" class="result-area"></div>
-            </section>
-        </div>
+            <div id="resultDisplay"></div>
+        </section>
     </main>
 
     <script src="script.js"></script>
