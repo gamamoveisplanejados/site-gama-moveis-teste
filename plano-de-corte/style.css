@@ -1,0 +1,37 @@
+/* Estilos adicionais para CNC Info */
+.cnc-info {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.info-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    border-left: 4px solid #3498db;
+}
+
+.info-card h4 {
+    color: #2c3e50;
+    margin-bottom: 0.75rem;
+}
+
+.info-card ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.info-card li {
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    color: #495057;
+}
