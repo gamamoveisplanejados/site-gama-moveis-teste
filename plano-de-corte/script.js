@@ -328,9 +328,12 @@ function renderResults() {
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
                     <h2 style="font-size: 1.5rem;">📐 Resultado da Otimização</h2>
                     <div style="display: flex; gap: 0.5rem;">
-                        <button class="btn-primary" onclick="alert('Exportação DXF em breve!')" style="padding: 0.5rem 1rem;">🎨 DXF</button>
-                        <button class="btn-primary" onclick="alert('Exportação G-Code em breve!')" style="background: var(--gradient-gold); padding: 0.5rem 1rem;">⚙️ G-Code</button>
-                        <button class="btn-primary" onclick="alert('Exportação PDF em breve!')" style="background: var(--gradient-success); padding: 0.5rem 1rem;">📄 PDF</button>
+                        <button onclick="exportPartsListToPDF()" class="btn-primary" style="background: linear-gradient(135deg, #20c997, #0d6efd); padding: 0.5rem 1rem;">
+                            📄 Exportar Lista PDF
+                        </button>
+                        <button onclick="exportFullReportToPDF()" class="btn-primary" style="background: linear-gradient(135deg, #fd7e14, #dc3545); padding: 0.5rem 1rem;">
+                            📑 Relatório Completo PDF
+                        </button>
                     </div>
                 </div>
                 
@@ -353,15 +356,31 @@ function renderResults() {
                     </div>
                 </div>
                 
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem;">
+                <div id="sheetsForExport" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem;">
                     ${r.sheets.map((sheet, idx) => `
-                        <div style="background: var(--bg-card); border-radius: 16px; overflow: hidden; border: 1px solid var(--border);">
+                        <div class="sheet-card-for-export" id="sheet-card-${idx}" style="background: var(--bg-card); border-radius: 16px; overflow: hidden; border: 1px solid var(--border);">
                             <div style="padding: 1rem; background: linear-gradient(135deg, #1a1a2e, #0f0f1a); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;">
                                 <strong>CHAPA ${sheet.id}</strong>
                                 <span style="font-size: 0.75rem; color: var(--accent-primary);">${sheet.material} | ${sheet.utilizationRate}%</span>
                             </div>
                             <div style="padding: 1rem; text-align: center;">
                                 <canvas id="sheet-canvas-${idx}" width="350" height="250" style="width: 100%; height: auto; background: #0a0a0f; border-radius: 8px; border: 1px solid var(--border);"></canvas>
+                            </div>
+                            <div style="padding: 1rem; border-top: 1px solid var(--border);">
+                                <table style="width: 100%; font-size: 0.7rem;">
+                                    <thead><tr><th>Peça</th><th>Base</th><th>Altura</th><th>Posição X</th><th>Posição Y</th></tr></thead>
+                                    <tbody>
+                                        ${sheet.placements.map(p => `
+                                            <tr>
+                                                <td>${escapeHtml(p.name)}</td>
+                                                <td>${p.originalWidth}mm</td>
+                                                <td>${p.originalHeight}mm</td>
+                                                <td>${p.x}mm</td>
+                                                <td>${p.y}mm</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     `).join('')}
@@ -437,6 +456,357 @@ function drawTechnicalVisualization(sheet, idx, sheetWidth, sheetHeight, bladeTh
     });
 }
 
+// Função para exportar apenas a lista de peças em PDF
+async function exportPartsListToPDF() {
+    if (state.parts.length === 0) {
+        alert('Nenhuma peça para exportar!');
+        return;
+    }
+    
+    showLoading('Gerando PDF da lista de peças...');
+    
+    const totalArea = state.parts.reduce((sum, p) => sum + (p.width * p.height), 0);
+    const date = new Date().toLocaleString('pt-BR');
+    
+    const pdfContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Lista de Peças - GAMA PRO</title>
+            <style>
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body {
+                    font-family: 'Inter', Arial, sans-serif;
+                    padding: 40px;
+                    background: white;
+                }
+                .header {
+                    text-align: center;
+                    margin-bottom: 30px;
+                    padding-bottom: 20px;
+                    border-bottom: 3px solid #00b4d8;
+                }
+                .header h1 {
+                    color: #1a1a2e;
+                    font-size: 28px;
+                }
+                .header p {
+                    color: #666;
+                    margin-top: 5px;
+                }
+                .info-box {
+                    background: #f0f2f5;
+                    padding: 15px;
+                    border-radius: 8px;
+                    margin-bottom: 30px;
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 15px;
+                }
+                .info-item {
+                    text-align: center;
+                }
+                .info-item .value {
+                    font-size: 24px;
+                    font-weight: bold;
+                    color: #00b4d8;
+                }
+                .info-item .label {
+                    font-size: 12px;
+                    color: #666;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 20px;
+                }
+                th, td {
+                    border: 1px solid #ddd;
+                    padding: 10px;
+                    text-align: left;
+                }
+                th {
+                    background: #1a1a2e;
+                    color: white;
+                }
+                tr:nth-child(even) {
+                    background: #f8f9fa;
+                }
+                .footer {
+                    margin-top: 40px;
+                    text-align: center;
+                    font-size: 10px;
+                    color: #999;
+                    border-top: 1px solid #ddd;
+                    padding-top: 20px;
+                }
+                .total-row {
+                    font-weight: bold;
+                    background: #e9ecef;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>📋 GAMA PRO - Lista de Peças</h1>
+                <p>Documento gerado em: ${date}</p>
+            </div>
+            
+            <div class="info-box">
+                <div class="info-item">
+                    <div class="value">${state.parts.length}</div>
+                    <div class="label">Total de Peças</div>
+                </div>
+                <div class="info-item">
+                    <div class="value">${(totalArea / 1000000).toFixed(2)} m²</div>
+                    <div class="label">Área Total</div>
+                </div>
+                <div class="info-item">
+                    <div class="value">${state.selectedMaterials.length}</div>
+                    <div class="label">Materiais</div>
+                </div>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome da Peça</th>
+                        <th>Largura (mm)</th>
+                        <th>Altura (mm)</th>
+                        <th>Área (m²)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${state.parts.map((part, idx) => `
+                        <tr>
+                            <td>${idx + 1}</td>
+                            <td><strong>${escapeHtml(part.name)}</strong></td>
+                            <td>${part.width}</td>
+                            <td>${part.height}</td>
+                            <td>${(part.width * part.height / 1000000).toFixed(4)}</td>
+                        </tr>
+                    `).join('')}
+                    <tr class="total-row">
+                        <td colspan="4" style="text-align: right;"><strong>TOTAL:</strong></td>
+                        <td><strong>${(totalArea / 1000000).toFixed(4)} m²</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="footer">
+                <p>GAMA PRO - Soluções em Otimização de Corte para CNC Router</p>
+                <p>www.gamapro.com.br | contato@gamapro.com.br</p>
+            </div>
+        </body>
+        </html>
+    `;
+    
+    const opt = {
+        margin: [10, 10, 10, 10],
+        filename: `lista_pecas_${new Date().toISOString().slice(0,19)}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    
+    const element = document.createElement('div');
+    element.innerHTML = pdfContent;
+    element.style.position = 'absolute';
+    element.style.left = '-9999px';
+    document.body.appendChild(element);
+    
+    await html2pdf().set(opt).from(element).save();
+    document.body.removeChild(element);
+    hideLoading();
+}
+
+// Função para exportar relatório completo com desenhos
+async function exportFullReportToPDF() {
+    if (!state.cuttingResult) {
+        alert('Nenhum resultado para exportar. Execute a otimização primeiro!');
+        return;
+    }
+    
+    showLoading('Gerando relatório completo...');
+    
+    const r = state.cuttingResult;
+    const date = new Date().toLocaleString('pt-BR');
+    const totalArea = r.totalAreaUsed;
+    const waste = r.totalAreaAvailable - r.totalAreaUsed;
+    
+    // Capturar os canvases como imagens
+    const canvasImages = [];
+    for (let i = 0; i < r.sheets.length; i++) {
+        const canvas = document.getElementById(`sheet-canvas-${i}`);
+        if (canvas) {
+            canvasImages.push(canvas.toDataURL('image/png'));
+        }
+    }
+    
+    let sheetsHTML = '';
+    r.sheets.forEach((sheet, idx) => {
+        sheetsHTML += `
+            <div style="page-break-after: always; margin-bottom: 30px;">
+                <h3 style="color: #00b4d8; margin-bottom: 15px;">CHAPA #${sheet.id} - ${sheet.material}</h3>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <p><strong>Aproveitamento:</strong> ${sheet.utilizationRate}%</p>
+                    <p><strong>Espessura:</strong> ${r.sheetThickness}mm</p>
+                    <p><strong>Dimensões:</strong> ${r.sheetWidth} x ${r.sheetHeight} mm</p>
+                    <p><strong>Peças:</strong> ${sheet.placements.length}</p>
+                </div>
+                <div style="text-align: center; margin: 20px 0;">
+                    <img src="${canvasImages[idx]}" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px;" />
+                </div>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                    <thead>
+                        <tr style="background: #1a1a2e; color: white;">
+                            <th style="padding: 8px; border: 1px solid #ddd;">Peça</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Largura</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Altura</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Posição X</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Posição Y</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${sheet.placements.map(p => `
+                            <tr>
+                                <td style="padding: 6px; border: 1px solid #ddd;">${escapeHtml(p.name)}</td>
+                                <td style="padding: 6px; border: 1px solid #ddd;">${p.originalWidth} mm</td>
+                                <td style="padding: 6px; border: 1px solid #ddd;">${p.originalHeight} mm</td>
+                                <td style="padding: 6px; border: 1px solid #ddd;">${p.x} mm</td>
+                                <td style="padding: 6px; border: 1px solid #ddd;">${p.y} mm</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
+    });
+    
+    const pdfContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Relatório Completo - GAMA PRO</title>
+            <style>
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body {
+                    font-family: 'Inter', Arial, sans-serif;
+                    padding: 40px;
+                    background: white;
+                }
+                .header {
+                    text-align: center;
+                    margin-bottom: 30px;
+                    padding-bottom: 20px;
+                    border-bottom: 3px solid #00b4d8;
+                }
+                .header h1 {
+                    color: #1a1a2e;
+                    font-size: 28px;
+                }
+                .header p {
+                    color: #666;
+                    margin-top: 5px;
+                }
+                .summary-grid {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 15px;
+                    margin: 30px 0;
+                }
+                .summary-card {
+                    background: #f0f2f5;
+                    padding: 15px;
+                    border-radius: 8px;
+                    text-align: center;
+                }
+                .summary-card .value {
+                    font-size: 22px;
+                    font-weight: bold;
+                    color: #00b4d8;
+                }
+                .summary-card .label {
+                    font-size: 11px;
+                    color: #666;
+                    margin-top: 5px;
+                }
+                .footer {
+                    margin-top: 40px;
+                    text-align: center;
+                    font-size: 10px;
+                    color: #999;
+                    border-top: 1px solid #ddd;
+                    padding-top: 20px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>📐 GAMA PRO - Relatório de Otimização</h1>
+                <p>Documento gerado em: ${date}</p>
+            </div>
+            
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="value">${r.totalSheets}</div>
+                    <div class="label">Chapas Utilizadas</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value">${r.totalParts}</div>
+                    <div class="label">Total de Peças</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value">${r.efficiency}%</div>
+                    <div class="label">Aproveitamento</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value">${(totalArea/1000000).toFixed(2)} m²</div>
+                    <div class="label">Área Utilizada</div>
+                </div>
+            </div>
+            
+            <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin-bottom: 30px;">
+                <h4 style="margin-bottom: 10px;">📊 Resumo da Otimização</h4>
+                <p><strong>Ferramenta:</strong> Router Bit Φ${r.bladeThickness}mm</p>
+                <p><strong>Dimensão da Chapa:</strong> ${r.sheetWidth} x ${r.sheetHeight} mm</p>
+                <p><strong>Área Total Disponível:</strong> ${(r.totalAreaAvailable/1000000).toFixed(2)} m²</p>
+                <p><strong>Desperdício:</strong> ${(waste/1000000).toFixed(2)} m² (${((waste/r.totalAreaAvailable)*100).toFixed(1)}%)</p>
+            </div>
+            
+            ${sheetsHTML}
+            
+            <div class="footer">
+                <p>GAMA PRO - Soluções em Otimização de Corte para CNC Router</p>
+                <p>www.gamapro.com.br | contato@gamapro.com.br</p>
+                <p>Documento gerado automaticamente - Cotas em milímetros (mm)</p>
+            </div>
+        </body>
+        </html>
+    `;
+    
+    const opt = {
+        margin: [10, 10, 10, 10],
+        filename: `relatorio_otimizacao_${new Date().toISOString().slice(0,19)}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    
+    const element = document.createElement('div');
+    element.innerHTML = pdfContent;
+    element.style.position = 'absolute';
+    element.style.left = '-9999px';
+    document.body.appendChild(element);
+    
+    await html2pdf().set(opt).from(element).save();
+    document.body.removeChild(element);
+    hideLoading();
+}
+
 function showLoading(msg) {
     const overlay = document.createElement('div');
     overlay.className = 'loading-overlay';
@@ -452,3 +822,5 @@ function hideLoading() {
 // Tornar funções globais
 window.removePart = removePart;
 window.toggleMaterial = toggleMaterial;
+window.exportPartsListToPDF = exportPartsListToPDF;
+window.exportFullReportToPDF = exportFullReportToPDF;
