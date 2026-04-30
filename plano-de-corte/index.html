@@ -1,18 +1,279 @@
-<div id="partsTable" class="parts-table-container">
-    <table id="partsListTable" style="width: 100%; border-collapse: collapse; display: none;">
-        <thead>
-            <tr style="text-align: left; font-size: 0.8rem; color: #64748b; border-bottom: 1px solid #e2e8f0;">
-                <th style="padding: 10px;">Item</th>
-                <th style="padding: 10px;">Corte</th>
-                <th style="padding: 10px;">Qtd</th>
-                <th style="padding: 10px;">Ação</th>
-            </tr>
-        </thead>
-        <tbody id="partsTableBody">
-            <!-- As peças vão aparecer aqui -->
-        </tbody>
-    </table>
-    <div id="emptyMsg" style="text-align: center; color: #94a3b8; padding: 40px;">
-        <p>Sua lista está vazia. Adicione peças acima.</p>
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Gama Pro | Otimizador de Corte para CNC Router</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Header com Navegação -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="logo-title">GAMA PRO</span>
+                        <span class="logo-sub">CNC Solutions</span>
+                    </div>
+                </div>
+                <nav class="main-nav">
+                    <a href="#" class="nav-link active">Início</a>
+                    <a href="#" class="nav-link">Otimizador</a>
+                    <a href="#" class="nav-link">Planos</a>
+                    <a href="#" class="nav-link">Suporte</a>
+                    <a href="#" class="nav-link btn-outline">Entrar</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section com Banner CNC -->
+    <section class="hero">
+        <div class="hero-bg">
+            <div class="hero-overlay"></div>
+            <div class="hero-content container">
+                <div class="hero-text">
+                    <span class="hero-badge">⚡ Sistema Profissional</span>
+                    <h1>Otimize seus cortes com<br><span class="gradient-text">tecnologia de ponta</span></h1>
+                    <p>Software avançado para nesting e otimização de corte em CNC Router. Aumente a produtividade da sua marcenaria em até 40%.</p>
+                    <div class="hero-buttons">
+                        <button id="scrollToOptimizer" class="btn-primary btn-large">
+                            🚀 Começar Agora
+                        </button>
+                        <button class="btn-secondary btn-large">
+                            ▶ Ver Demonstração
+                        </button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <strong>+50.000</strong>
+                            <span>Clientes ativos</span>
+                        </div>
+                        <div class="stat-item">
+                            <strong>98%</strong>
+                            <span>Eficiência média</span>
+                        </div>
+                        <div class="stat-item">
+                            <strong>24/7</strong>
+                            <span>Suporte técnico</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="cnc-card">
+                        <div class="cnc-animation">
+                            <svg viewBox="0 0 400 300" fill="none">
+                                <rect x="50" y="100" width="300" height="150" rx="8" fill="#1a1a2e" stroke="#00b4d8" stroke-width="2"/>
+                                <rect x="70" y="120" width="260" height="110" fill="#0f0f1a"/>
+                                <line x1="70" y1="175" x2="330" y2="175" stroke="#00b4d8" stroke-width="1" stroke-dasharray="5,5"/>
+                                <line x1="200" y1="120" x2="200" y2="230" stroke="#00b4d8" stroke-width="1" stroke-dasharray="5,5"/>
+                                <circle cx="200" cy="175" r="25" fill="none" stroke="#20c997" stroke-width="2"/>
+                                <path d="M190 175l10 10 20-20" stroke="#20c997" stroke-width="2" fill="none"/>
+                                <text x="150" y="260" fill="#6c6c7e" font-size="12">Work Area: 2750 x 1850 mm</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Recursos Avançados</span>
+                <h2>Tudo que você precisa para<br>otimizar sua produção</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Nesting Inteligente</h3>
+                    <p>Algoritmo avançado que reduz desperdício e maximiza o aproveitamento da chapa.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Geração G-Code</h3>
+                    <p>Exporte diretamente para sua CNC Router. Compatível com principais controladoras.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📐</div>
+                    <h3>Múltiplos Formatos</h3>
+                    <p>Exporte em DXF, PDF e JSON. Compatível com AutoCAD, Aspire e Vectric.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>10+ Materiais</h3>
+                    <p>Biblioteca completa de MDF nas principais cores e acabamentos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Optimizer Section -->
+    <section class="optimizer-section" id="optimizer">
+        <div class="container">
+            <div class="optimizer-header">
+                <h2>Plano de Corte Profissional</h2>
+                <p>Configure seus parâmetros e gere o layout otimizado em segundos</p>
+            </div>
+            
+            <div class="optimizer-grid">
+                <!-- Left Column - Controls -->
+                <div class="controls-panel">
+                    <div class="control-group">
+                        <label>Espessura da Chapa</label>
+                        <div class="thickness-selector">
+                            <button class="thickness-option" data-thickness="6">6mm</button>
+                            <button class="thickness-option" data-thickness="15">15mm</button>
+                            <button class="thickness-option active" data-thickness="18">18mm</button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Ferramenta (Router Bit)</label>
+                        <div class="tool-control">
+                            <span class="tool-label">Diâmetro</span>
+                            <input type="range" id="bladeThickness" min="0" max="10" step="0.5" value="3">
+                            <span id="bladeValue" class="tool-value">3.0 mm</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Dimensões da Chapa</label>
+                        <div class="dimension-controls">
+                            <div class="dim-input">
+                                <span>Largura</span>
+                                <input type="number" id="sheetWidth" value="2750" step="10">
+                                <span>mm</span>
+                            </div>
+                            <div class="dim-input">
+                                <span>Altura</span>
+                                <input type="number" id="sheetHeight" value="1850" step="10">
+                                <span>mm</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Materiais Disponíveis</label>
+                        <div id="materialsGrid" class="materials-list"></div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Adicionar Peça</label>
+                        <div class="add-part-controls">
+                            <input type="text" id="partName" placeholder="Nome da peça" class="input-field">
+                            <div class="dim-row">
+                                <input type="number" id="partWidth" placeholder="Base" class="input-small">
+                                <span>×</span>
+                                <input type="number" id="partHeight" placeholder="Altura" class="input-small">
+                                <input type="number" id="partQuantity" value="1" class="input-tiny">
+                            </div>
+                            <button id="addPartBtn" class="btn-add-part">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg>
+                                Adicionar à Lista
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Parts List -->
+                <div class="list-panel">
+                    <div class="list-header">
+                        <h3>Lista de Peças</h3>
+                        <span id="partsCount" class="count-badge">0</span>
+                    </div>
+                    <div id="partsTable" class="parts-list-container">
+                        <div class="empty-list">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <line x1="9" y1="9" x2="15" y2="15"/>
+                                <line x1="15" y1="9" x2="9" y2="15"/>
+                            </svg>
+                            <p>Nenhuma peça adicionada</p>
+                            <span>Adicione peças no painel ao lado</span>
+                        </div>
+                    </div>
+                    <button id="optimizeBtn" class="btn-optimize">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                        Gerar Plano de Corte
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <div id="resultDisplay" class="results-section" style="display: none;"></div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <div class="logo-icon">🔧</div>
+                        <div>
+                            <span class="logo-title">GAMA PRO</span>
+                            <span class="logo-sub">CNC Solutions</span>
+                        </div>
+                    </div>
+                    <p>Soluções inteligentes para otimização de corte em CNC Router. Tecnologia que transforma sua produção.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">💼</a>
+                        <a href="#" class="social-link">🐙</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Produto</h4>
+                    <ul>
+                        <li><a href="#">Funcionalidades</a></li>
+                        <li><a href="#">Planos e Preços</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Roadmap</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Suporte</h4>
+                    <ul>
+                        <li><a href="#">Documentação</a></li>
+                        <li><a href="#">Tutoriais</a></li>
+                        <li><a href="#">Fórum</a></li>
+                        <li><a href="#">Status</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><a href="mailto:contato@gamapro.com.br">contato@gamapro.com.br</a></li>
+                        <li><a href="tel:+5511999999999">(11) 99999-9999</a></li>
+                        <li>Seg - Sex: 8h às 18h</li>
+                        <li>São Paulo, SP</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GAMA PRO - Todos os direitos reservados. Desenvolvido para máxima eficiência em usinagem CNC.</p>
+                <div class="footer-links">
+                    <a href="#">Política de Privacidade</a>
+                    <a href="#">Termos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
