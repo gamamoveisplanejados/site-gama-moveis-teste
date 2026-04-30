@@ -3,106 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gama Pro | Otimizador de Corte</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Gama Pro | Otimizador de Corte CNC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     
     <style>
-        /* ESTILO INTERNO PARA NÃO FALHAR */
+        /* DESIGN PREMIUM GAMA PRO */
         :root {
             --primary: #0052FF;
+            --primary-dark: #003ECC;
             --dark: #0F172A;
-            --bg: #F8FAFC;
+            --bg: #F1F5F9;
             --card: #FFFFFF;
             --text: #334155;
             --border: #E2E8F0;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-        /* NAVBAR */
-        .navbar { background: white; padding: 1rem 5%; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: 800; font-size: 1.5rem; color: var(--dark); }
+        /* HEADER & NAVIGATION */
+        .navbar { background: white; padding: 1rem 5%; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--dark); text-decoration: none; }
         .logo span { color: var(--primary); }
-        .nav-links a { text-decoration: none; color: var(--text); font-weight: 600; margin-left: 20px; font-size: 0.9rem; }
+        .nav-links a { text-decoration: none; color: var(--text); font-weight: 600; margin-left: 20px; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
 
-        /* HERO BANNER */
+        /* HERO BANNER - ESTILO SITE PROFISSIONAL */
         .hero {
-            height: 350px;
-            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
-                        url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1470&auto=format&fit=crop');
+            height: 300px;
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), 
+                        url('https://images.unsplash.com/photo-1530047625168-4b29bf8466bc?q=80&w=1470&auto=format&fit=crop');
             background-size: cover; background-position: center;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            color: white; text-align: center; padding: 0 20px;
+            color: white; text-align: center; padding: 0 20px; border-bottom: 5px solid var(--primary);
         }
-        .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 10px; }
-        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; }
+        .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; text-transform: uppercase; letter-spacing: -1px; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 700px; font-weight: 400; }
 
-        /* CONTAINER PRINCIPAL */
-        .container { max-width: 1200px; margin: -60px auto 50px; padding: 0 20px; display: grid; grid-template-columns: 350px 1fr; gap: 30px; }
+        /* LAYOUT CONTAINER */
+        .container { max-width: 1200px; margin: -50px auto 50px; padding: 0 20px; display: grid; grid-template-columns: 360px 1fr; gap: 30px; position: relative; z-index: 10; }
 
-        /* CARDS */
-        .card { background: white; border-radius: 16px; padding: 25px; border: 1px solid var(--border); box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 25px; }
-        .card h3 { font-size: 1.1rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; color: var(--dark); }
+        /* CARDS ESTILIZADOS */
+        .card { background: var(--card); border-radius: 12px; padding: 24px; border: 1px solid var(--border); box-shadow: 0 15px 30px rgba(0,0,0,0.08); margin-bottom: 25px; }
+        .card h3 { font-size: 1rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; color: var(--dark); text-transform: uppercase; letter-spacing: 1px; }
 
         /* INPUTS E BOTÕES */
-        .input-group { margin-bottom: 20px; }
-        label { font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 8px; color: #64748b; }
-        input[type="number"], input[type="text"] { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: #f1f5f9; font-size: 1rem; }
+        .input-group { margin-bottom: 18px; }
+        label { font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 6px; color: #64748b; text-transform: uppercase; }
+        input[type="number"], input[type="text"] { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: #f8fafc; font-size: 0.95rem; transition: 0.3s; }
+        input:focus { border-color: var(--primary); outline: none; background: white; box-shadow: 0 0 0 4px rgba(0, 82, 255, 0.1); }
         
-        .btn-add { width: 100%; padding: 14px; background: var(--dark); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.3s; }
-        .btn-add:hover { background: #000; }
+        .btn-add { width: 100%; padding: 14px; background: var(--dark); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn-add:hover { background: #000; transform: translateY(-2px); }
         
-        .btn-primary { padding: 14px 28px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; }
+        .btn-primary { padding: 14px 28px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .btn-primary:hover { background: var(--primary-dark); box-shadow: 0 8px 15px rgba(0, 82, 255, 0.3); }
         
-        /* RESULTADOS */
+        /* RESULTADOS E TABELAS */
         .flex-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .sheet-canvas { width: 100%; background: white; border: 2px solid var(--dark); border-radius: 8px; margin-top: 20px; }
+        .parts-table-container { min-height: 150px; background: #f8fafc; border-radius: 8px; border: 1px dashed #cbd5e1; }
         
-        .thickness-tabs { display: flex; gap: 10px; }
-        .tab-opt { padding: 8px 15px; border: 1px solid var(--border); border-radius: 6px; background: white; cursor: pointer; font-weight: 600; }
+        .thickness-tabs { display: flex; gap: 8px; }
+        .tab-opt { flex: 1; padding: 10px; border: 1px solid var(--border); border-radius: 8px; background: white; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
         .tab-opt.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-        @media (max-width: 900px) { .container { grid-template-columns: 1fr; margin-top: 20px; } .hero h1 { font-size: 2rem; } }
+        /* ÁREA DO CANVAS (PLANO DE CORTE) */
+        .result-panel { margin-top: 30px; text-align: center; }
+        canvas, .sheet-canvas { max-width: 100%; height: auto; background: white; border: 8px solid var(--dark); border-radius: 4px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
+
+        @media (max-width: 900px) { .container { grid-template-columns: 1fr; margin-top: 20px; } .hero h1 { font-size: 1.8rem; } }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="logo">GAMA<span>PRO</span></div>
+        <a href="#" class="logo">GAMA<span>PRO</span></a>
         <div class="nav-links">
             <a href="https://gamamoveisplanejados.com.br">Voltar ao Site</a>
         </div>
     </nav>
 
     <header class="hero">
-        <h1>Otimização Gama Pro</h1>
-        <p>Tecnologia de nesting industrial para marcenarias modernas.</p>
+        <h1>Otimização de Corte</h1>
+        <p>Soluções inteligentes em nesting para marcenarias e indústrias de móveis.</p>
     </header>
 
     <main class="container">
-        <!-- Coluna de Configuração -->
+        <!-- Lado Esquerdo: Parâmetros -->
         <aside>
             <div class="card">
                 <h3>⚙️ Configurações</h3>
                 <div class="input-group">
-                    <label>Espessura do MDF</label>
+                    <label>Espessura do Material</label>
                     <div class="thickness-tabs">
-                        <button class="tab-opt" onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">6mm</button>
-                        <button class="tab-opt" onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">15mm</button>
-                        <button class="tab-opt active" onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">18mm</button>
+                        <button class="tab-opt" onclick="activateTab(this)">6mm</button>
+                        <button class="tab-opt" onclick="activateTab(this)">15mm</button>
+                        <button class="tab-opt active" onclick="activateTab(this)">18mm</button>
                     </div>
                 </div>
                 <div class="input-group">
                     <label>Fresa / Serra (mm)</label>
-                    <input type="number" id="bladeThickness" value="3" step="0.5">
+                    <input type="number" id="bladeThickness" value="3" step="0.1">
                 </div>
                 <div class="input-group">
-                    <label>Chapa Largura x Altura (mm)</label>
+                    <label>Dimensões da Chapa (mm)</label>
                     <div style="display: flex; gap: 10px; align-items: center;">
                         <input type="number" id="sheetWidth" value="2750">
-                        <span>×</span>
+                        <span style="font-weight: bold; color: #cbd5e1;">×</span>
                         <input type="number" id="sheetHeight" value="1850">
                     </div>
                 </div>
@@ -111,36 +119,44 @@
             <div class="card">
                 <h3>➕ Nova Peça</h3>
                 <div class="input-group">
-                    <input type="text" id="partName" placeholder="Nome da peça (Ex: Lateral)">
+                    <label>Etiqueta / Nome</label>
+                    <input type="text" id="partName" placeholder="Ex: Porta Cozinha">
                 </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
-                    <div class="input-group"><label>Base</label><input type="number" id="partWidth"></div>
-                    <div class="input-group"><label>Altura</label><input type="number" id="partHeight"></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+                    <div class="input-group"><label>Base</label><input type="number" id="partWidth" placeholder="0"></div>
+                    <div class="input-group"><label>Altura</label><input type="number" id="partHeight" placeholder="0"></div>
                     <div class="input-group"><label>Qtd</label><input type="number" id="partQuantity" value="1"></div>
                 </div>
                 <button id="addPartBtn" class="btn-add">Adicionar à Lista</button>
             </div>
         </aside>
 
-        <!-- Coluna de Lista -->
+        <!-- Lado Direito: Lista e Resultado -->
         <section>
             <div class="card">
                 <div class="flex-header">
-                    <h3>Lista de Produção</h3>
-                    <div style="display: flex; gap: 10px;">
-                        <button id="optimizeBtn" class="btn-primary">⚡ Otimizar Corte</button>
-                        <button id="newCalcBtn" style="padding: 10px; border: none; background: none; cursor: pointer;">Limpar</button>
+                    <h3>📋 Lista de Peças</h3>
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <button id="newCalcBtn" style="background:none; border:none; color: #94a3b8; cursor:pointer; font-size: 0.8rem; font-weight:bold;">LIMPAR TUDO</button>
+                        <button id="optimizeBtn" class="btn-primary">⚡ OTIMIZAR CORTE</button>
                     </div>
                 </div>
-                <div id="partsTable">
-                    <p style="text-align: center; color: #94a3b8; padding: 20px;">Adicione peças para começar o cálculo.</p>
+                <div id="partsTable" class="parts-table-container">
+                    <!-- O script vai preencher aqui -->
                 </div>
             </div>
 
-            <div id="resultDisplay"></div>
+            <!-- Onde o plano de corte será desenhado -->
+            <div id="resultDisplay" class="result-panel"></div>
         </section>
     </main>
 
+    <script>
+        function activateTab(btn) {
+            btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
